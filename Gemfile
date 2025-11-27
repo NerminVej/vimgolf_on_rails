@@ -22,9 +22,11 @@ group :development, :test do
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
 end
+
 group :development do
   gem "web-console"
 end
+
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
