@@ -11,5 +11,8 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "devise/sessions#new"
+  root "pages#home"
+
+  # Pages routes
+  get "home", to: "pages#home"
 end

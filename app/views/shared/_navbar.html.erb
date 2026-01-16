@@ -1,0 +1,23 @@
+<nav class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+  <div class="container mx-auto px-5 py-4 flex justify-between items-center">
+    <!-- Brand -->
+    <div class="flex items-center">
+      <%= link_to "Vimgolf", root_path, class: "text-xl font-bold text-blue-600 hover:text-blue-800" %>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="flex items-center gap-4">
+      <% if user_signed_in? %>
+        <!-- Authenticated User -->
+        <span class="text-gray-700">
+          <%= current_user.email %>
+        </span>
+        <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition" %>
+      <% else %>
+        <!-- Unauthenticated User -->
+        <%= link_to "Sign In", user_session_path, class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition" %>
+        <%= link_to "Sign Up", user_registration_path, class: "px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition" %>
+      <% end %>
+    </div>
+  </div>
+</nav>
