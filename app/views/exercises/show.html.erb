@@ -2,6 +2,7 @@
   <div class="flex justify-between items-center mb-6">
     <h1 class="text-4xl font-bold text-gray-800"><%= @exercise.title %></h1>
     <div class="flex gap-2">
+      <%= link_to "Play Exercise", play_exercise_path(@exercise), class: "px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition" %>
       <%= link_to "← Back to Exercises", exercises_path, class: "px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition" %>
       <% if @exercise.user == current_user %>
         <%= link_to "Edit", edit_exercise_path(@exercise), class: "px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition" %>

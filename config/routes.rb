@@ -2,7 +2,12 @@ Rails.application.routes.draw do
   devise_for :users
 
   # Exercise routes
-  resources :exercises
+  resources :exercises do
+    member do
+      get :play
+      post :complete
+    end
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

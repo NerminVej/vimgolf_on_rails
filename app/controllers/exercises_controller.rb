@@ -1,6 +1,6 @@
 class ExercisesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_exercise, only: [:show, :edit, :update, :destroy]
+  before_action :set_exercise, only: [:show, :edit, :update, :destroy, :play, :complete]
   before_action :authorize_user!, only: [:edit, :update, :destroy]
 
   # GET /exercises
@@ -10,7 +10,25 @@ class ExercisesController < ApplicationController
 
   # GET /exercises/:id
   def show
+    if params[:completed] == "true" && params[:keystrokes].present?
+      flash.now[:notice] = "Congratulations! You completed this exercise in #{params[:keystrokes]} keystrokes!"
+    end
+  end
+
+  # GET /exercises/:id/play
+  def play
     # @exercise set by before_action
+  end
+
+  # POST /exercises/:id/complete
+  def complete
+    content = params[:content]
+
+    if content && content.strip == @exercise.end_file.strip
+      render json: { success: true, message: "Congratulations! You completed this exercise!" }
+    else
+      render json: { success: false, message: "Content doesn't match the target." }, status: :unprocessable_entity
+    end
   end
 
   # GET /exercises/new
