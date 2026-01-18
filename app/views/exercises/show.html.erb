@@ -1,0 +1,46 @@
+<div class="w-full">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-4xl font-bold text-gray-800"><%= @exercise.title %></h1>
+    <div class="flex gap-2">
+      <%= link_to "← Back to Exercises", exercises_path, class: "px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition" %>
+      <% if @exercise.user == current_user %>
+        <%= link_to "Edit", edit_exercise_path(@exercise), class: "px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition" %>
+        <%= button_to "Delete", exercise_path(@exercise), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+    <h2 class="text-xl font-semibold text-blue-900 mb-2">Description</h2>
+    <p class="text-gray-700 whitespace-pre-wrap"><%= @exercise.description %></p>
+  </div>
+
+  <div class="flex items-center gap-4 text-sm text-gray-500 mb-6">
+    <span>Created by <strong><%= @exercise.user.email %></strong></span>
+    <span>•</span>
+    <span><%= @exercise.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Start File -->
+    <div class="bg-white border border-gray-300 rounded-lg overflow-hidden">
+      <div class="bg-gray-100 px-4 py-2 border-b border-gray-300">
+        <h3 class="font-semibold text-gray-800">Start File</h3>
+      </div>
+      <pre class="p-4 overflow-x-auto text-sm font-mono bg-gray-50"><%= @exercise.start_file %></pre>
+    </div>
+
+    <!-- End File -->
+    <div class="bg-white border border-green-200 rounded-lg overflow-hidden">
+      <div class="bg-green-100 px-4 py-2 border-b border-green-300">
+        <h3 class="font-semibold text-green-800">End File (Goal)</h3>
+      </div>
+      <pre class="p-4 overflow-x-auto text-sm font-mono bg-green-50"><%= @exercise.end_file %></pre>
+    </div>
+  </div>
+
+  <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mt-6">
+    <h3 class="text-lg font-semibold text-yellow-900 mb-2">Challenge</h3>
+    <p class="text-gray-700">Transform the <strong>Start File</strong> into the <strong>End File</strong> using Vim commands with the minimum number of keystrokes!</p>
+  </div>
+</div>

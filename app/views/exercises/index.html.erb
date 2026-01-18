@@ -1,0 +1,40 @@
+<div class="w-full">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-4xl font-bold text-gray-800">VimGolf Exercises</h1>
+    <%= link_to "Create New Exercise", new_exercise_path, class: "px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-semibold" %>
+  </div>
+
+  <% if @exercises.any? %>
+    <div class="space-y-4">
+      <% @exercises.each do |exercise| %>
+        <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition">
+          <div class="flex justify-between items-start">
+            <div class="flex-1">
+              <h2 class="text-2xl font-semibold text-gray-800 mb-2">
+                <%= link_to exercise.title, exercise_path(exercise), class: "hover:text-blue-600 transition" %>
+              </h2>
+              <p class="text-gray-600 mb-3"><%= truncate(exercise.description, length: 200) %></p>
+              <div class="flex items-center gap-4 text-sm text-gray-500">
+                <span>Created by <%= exercise.user.email %></span>
+                <span>•</span>
+                <span><%= time_ago_in_words(exercise.created_at) %> ago</span>
+              </div>
+            </div>
+
+            <% if exercise.user == current_user %>
+              <div class="flex gap-2 ml-4">
+                <%= link_to "Edit", edit_exercise_path(exercise), class: "px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition text-sm" %>
+                <%= button_to "Delete", exercise_path(exercise), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition text-sm" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="bg-blue-50 border border-blue-200 rounded-lg p-8 text-center">
+      <p class="text-gray-700 text-lg mb-4">No exercises yet. Be the first to create one!</p>
+      <%= link_to "Create First Exercise", new_exercise_path, class: "px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-semibold inline-block" %>
+    </div>
+  <% end %>
+</div>
