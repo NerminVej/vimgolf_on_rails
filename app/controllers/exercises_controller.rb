@@ -5,7 +5,7 @@ class ExercisesController < ApplicationController
 
   # GET /exercises
   def index
-    @exercises = Exercise.recent.includes(:user)
+    @pagy, @exercises = pagy(:offset, Exercise.recent.includes(:user), limit: 20)
   end
 
   # GET /exercises/:id

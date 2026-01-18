@@ -16,7 +16,7 @@ gem "solid_cable"
 gem "bootsnap", require: false
 
 gem "kamal", require: false
-
+gem 'pagy', '~> 43.2'
 gem "thruster", require: false
 
 gem "devise"

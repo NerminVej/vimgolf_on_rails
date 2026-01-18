@@ -1,0 +1,47 @@
+<%# Tailwind-styled Pagy navigation %>
+<% if pagy.pages > 1 %>
+  <nav class="flex items-center justify-center gap-1" aria-label="Pagination">
+    <%# Previous page link %>
+    <% if pagy.prev %>
+      <%= link_to pagy.url_for(pagy.prev), class: "px-3 py-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition", aria_label: "Previous page" do %>
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+        </svg>
+      <% end %>
+    <% else %>
+      <span class="px-3 py-2 rounded-md border border-gray-200 bg-gray-100 text-sm font-medium text-gray-400 cursor-not-allowed">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+        </svg>
+      </span>
+    <% end %>
+
+    <%# Page number links %>
+    <% pagy.series.each do |item| %>
+      <% if item.is_a?(Integer) %>
+        <% if item == pagy.page %>
+          <span class="px-4 py-2 rounded-md border border-blue-500 bg-blue-500 text-sm font-semibold text-white"><%= item %></span>
+        <% else %>
+          <%= link_to item, pagy.url_for(item), class: "px-4 py-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition" %>
+        <% end %>
+      <% elsif item == :gap %>
+        <span class="px-4 py-2 text-sm font-medium text-gray-500">...</span>
+      <% end %>
+    <% end %>
+
+    <%# Next page link %>
+    <% if pagy.next %>
+      <%= link_to pagy.url_for(pagy.next), class: "px-3 py-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition", aria_label: "Next page" do %>
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+        </svg>
+      <% end %>
+    <% else %>
+      <span class="px-3 py-2 rounded-md border border-gray-200 bg-gray-100 text-sm font-medium text-gray-400 cursor-not-allowed">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+        </svg>
+      </span>
+    <% end %>
+  </nav>
+<% end %>
