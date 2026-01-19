@@ -1,0 +1,51 @@
+# Vimgolf Exercises Template
+#
+# This file serves as a template for importing exercises.
+# Copy this format to create your own exercise files.
+#
+# Usage:
+#   1. Create a YAML file in db/exercise_data/ folder
+#   2. Fill in the exercises following this format
+#   3. Run: rails import:exercises[filename.yml]
+#
+# You can use Claude or ChatGPT to convert vimgolf data into this format!
+
+exercises:
+  - title: "Swap Config Values"
+    description: |
+      Fix the configuration by swapping the CHALLENGE_FOLDER and SOLUTIONS_FOLDER values.
+      This is a common mistake when setting up folder configurations.
+    start_file: |
+      app.config['CHALLENGE_FOLDER'] = SOLUTIONS_FOLDER
+      app.config['SOLUTIONS_FOLDER'] = CHALLENGE_FOLDER
+    end_file: |
+      app.config['CHALLENGE_FOLDER'] = CHALLENGE_FOLDER
+      app.config['SOLUTIONS_FOLDER'] = SOLUTIONS_FOLDER
+
+  - title: "Delete Empty Lines"
+    description: |
+      Remove all empty lines from this file while keeping the content intact.
+      Practice efficient deletion commands.
+    start_file: |
+      line 1
+
+      line 2
+
+      line 3
+    end_file: |
+      line 1
+      line 2
+      line 3
+
+  - title: "Add Semicolons"
+    description: |
+      Add semicolons to the end of each JavaScript statement.
+      Master the power of macros and repetition.
+    start_file: |
+      const name = "John"
+      const age = 25
+      const city = "NYC"
+    end_file: |
+      const name = "John";
+      const age = 25;
+      const city = "NYC";

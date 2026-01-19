@@ -1,0 +1,134 @@
+exercises:
+  - title: "Swap Config Values"
+    description: |
+      Fix the configuration by swapping the CHALLENGE_FOLDER and SOLUTIONS_FOLDER values.
+      The variables are assigned to the wrong constants!
+    start_file: |
+      app.config['CHALLENGE_FOLDER'] = SOLUTIONS_FOLDER
+      app.config['SOLUTIONS_FOLDER'] = CHALLENGE_FOLDER
+    end_file: |
+      app.config['CHALLENGE_FOLDER'] = CHALLENGE_FOLDER
+      app.config['SOLUTIONS_FOLDER'] = SOLUTIONS_FOLDER
+
+  - title: "Simple Text Editing"
+    description: |
+      Change 'Hello' to 'Goodbye' in this simple text file.
+      Practice your basic editing commands!
+    start_file: |
+      Hello World
+    end_file: |
+      Goodbye World
+
+  - title: "Add Semicolons to JavaScript"
+    description: |
+      Add semicolons to the end of each JavaScript variable declaration.
+      This is a great exercise for learning macros and repetition.
+    start_file: |
+      const name = "John"
+      const age = 25
+      const city = "New York"
+      const country = "USA"
+    end_file: |
+      const name = "John";
+      const age = 25;
+      const city = "New York";
+      const country = "USA";
+
+  - title: "Delete Empty Lines"
+    description: |
+      Remove all the empty lines from this file while preserving the content.
+      Learn efficient ways to delete multiple lines at once.
+    start_file: |
+      line 1
+
+      line 2
+
+      line 3
+
+      line 4
+    end_file: |
+      line 1
+      line 2
+      line 3
+      line 4
+
+  - title: "Reverse the Lines"
+    description: |
+      Reverse the order of lines in this file.
+      The last line should become the first, and vice versa.
+    start_file: |
+      first
+      second
+      third
+      fourth
+    end_file: |
+      fourth
+      third
+      second
+      first
+
+  - title: "Wrap Words in Quotes"
+    description: |
+      Wrap each word on each line in double quotes.
+      Perfect for learning search and replace patterns.
+    start_file: |
+      apple banana cherry
+      dog elephant fox
+    end_file: |
+      "apple" "banana" "cherry"
+      "dog" "elephant" "fox"
+
+  - title: "Convert to Title Case"
+    description: |
+      Convert the lowercase text to Title Case.
+      Each word should start with a capital letter.
+    start_file: |
+      the quick brown fox
+      jumps over the lazy dog
+    end_file: |
+      The Quick Brown Fox
+      Jumps Over The Lazy Dog
+
+  - title: "Sort Lines Alphabetically"
+    description: |
+      Sort all the lines in alphabetical order.
+      Vim has built-in commands for this!
+    start_file: |
+      zebra
+      apple
+      monkey
+      banana
+      cat
+    end_file: |
+      apple
+      banana
+      cat
+      monkey
+      zebra
+
+  - title: "Duplicate Each Line"
+    description: |
+      Duplicate each line, so every line appears twice in succession.
+      Great for practicing yank and paste commands.
+    start_file: |
+      line 1
+      line 2
+      line 3
+    end_file: |
+      line 1
+      line 1
+      line 2
+      line 2
+      line 3
+      line 3
+
+  - title: "Remove Trailing Spaces"
+    description: |
+      Remove all trailing whitespace from the end of each line.
+      This is a common code cleanup task.
+    start_file: "line 1   \nline 2  \nline 3    \nline 4 "
+    end_file: |
+      line 1
+      line 2
+      line 3
+      line 4
