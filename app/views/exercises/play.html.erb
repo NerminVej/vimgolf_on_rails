@@ -1,14 +1,4 @@
 <div class="w-full h-screen flex flex-col" data-controller="vim-editor" data-vim-editor-start-content-value="<%= @exercise.start_file.to_json %>" data-vim-editor-target-content-value="<%= @exercise.end_file.to_json %>" data-vim-editor-exercise-id-value="<%= @exercise.id %>">
-  <div class="flex justify-between items-center px-6 py-3 bg-white border-b border-gray-200">
-    <div class="flex items-center gap-4">
-      <h1 class="text-xl font-bold text-gray-800"><%= @exercise.title %></h1>
-      <span class="text-sm text-gray-600">Keystrokes: <span class="font-mono font-semibold" data-vim-editor-target="keystrokes">0</span></span>
-    </div>
-    <div class="flex gap-2">
-      <%= link_to "← Back", exercise_path(@exercise), class: "px-3 py-1 text-sm bg-gray-500 text-white rounded hover:bg-gray-600 transition" %>
-    </div>
-  </div>
-
   <div class="flex-1 grid grid-cols-2 gap-0 overflow-hidden">
     <div class="flex flex-col border-r border-gray-300">
       <div class="bg-gray-100 px-4 py-2 border-b border-gray-300">
@@ -24,6 +14,26 @@
         <h3 class="text-sm font-semibold text-green-800">Target</h3>
       </div>
       <pre class="flex-1 p-3 overflow-auto text-sm font-mono bg-green-50"><%= @exercise.end_file %></pre>
+    </div>
+  </div>
+
+  <div class="bg-gray-50 border-t border-gray-300 px-6 py-3" data-vim-editor-target="status">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-6">
+        <div class="text-sm text-gray-700">
+          <span class="font-semibold">Title:</span> <%= @exercise.title %>
+        </div>
+        <div class="text-sm text-gray-700">
+          <span class="font-semibold">Description:</span> <%= @exercise.description %>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="text-sm text-gray-700">
+          <span class="font-semibold">Keystrokes:</span>
+          <span class="font-mono font-semibold ml-1" data-vim-editor-target="keystrokes">0</span>
+        </div>
+        <%= link_to "← Back", exercise_path(@exercise), class: "px-3 py-1 text-sm bg-gray-500 text-white rounded hover:bg-gray-600 transition" %>
+      </div>
     </div>
   </div>
 </div>
