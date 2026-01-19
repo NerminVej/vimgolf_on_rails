@@ -1,5 +1,6 @@
 class Exercise < ApplicationRecord
   belongs_to :user
+  has_many :practice_attempts, dependent: :nullify
 
   validates :title, presence: true, length: { minimum: 3, maximum: 200 }
   validates :description, presence: true, length: { minimum: 10, maximum: 2000 }

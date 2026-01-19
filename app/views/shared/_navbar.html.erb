@@ -6,6 +6,7 @@
 
       <% if user_signed_in? %>
         <%= link_to "Exercises", exercises_path, class: "text-gray-700 hover:text-blue-600 font-semibold transition" %>
+        <%= button_to "🎯 Practice Mode", practice_sessions_path, method: :post, class: "px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition font-semibold" %>
       <% end %>
     </div>
 

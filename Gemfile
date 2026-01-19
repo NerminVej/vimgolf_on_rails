@@ -20,7 +20,7 @@ gem 'pagy', '~> 43.2'
 gem "thruster", require: false
 
 gem "devise"
-
+gem 'simple_form'
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false

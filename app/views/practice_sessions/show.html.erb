@@ -1,0 +1,103 @@
+<div class="w-full"
+     data-controller="practice-editor"
+     data-practice-editor-start-content-value="<%= @exercise.start_file.to_json %>"
+     data-practice-editor-target-content-value="<%= @exercise.end_file.to_json %>"
+     data-practice-editor-attempt-id-value="<%= @current_attempt.id %>"
+     data-practice-editor-session-id-value="<%= @session.id %>"
+     data-practice-editor-session-started-at-value="<%= @session.started_at.to_i %>">
+
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-4xl font-bold text-gray-800">🎯 Practice Mode: <%= @exercise.title %></h1>
+    <div class="flex gap-2">
+      <%= button_to "✕ Quit Practice", quit_practice_session_path(@session), method: :post, class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition font-semibold", data: { turbo_confirm: "Are you sure you want to quit this practice session?" } %>
+    </div>
+  </div>
+
+  <!-- Session Stats Panel -->
+  <div class="bg-purple-50 border border-purple-200 rounded-lg p-6 mb-6">
+    <h2 class="text-xl font-semibold text-purple-900 mb-4">Session Stats</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="text-center">
+        <div class="text-sm text-gray-600 mb-1">Completed</div>
+        <div class="text-2xl font-bold text-purple-700" data-practice-editor-target="completedCount"><%= @session.total_exercises_completed %></div>
+      </div>
+      <div class="text-center">
+        <div class="text-sm text-gray-600 mb-1">Attempted</div>
+        <div class="text-2xl font-bold text-purple-700" data-practice-editor-target="attemptedCount"><%= @session.total_exercises_attempted %></div>
+      </div>
+      <div class="text-center">
+        <div class="text-sm text-gray-600 mb-1">Total Keystrokes</div>
+        <div class="text-2xl font-bold text-purple-700" data-practice-editor-target="totalKeystrokes"><%= @session.total_keystrokes %></div>
+      </div>
+      <div class="text-center">
+        <div class="text-sm text-gray-600 mb-1">Session Time</div>
+        <div class="text-2xl font-bold text-purple-700 font-mono" data-practice-editor-target="sessionTime">00:00</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+    <h2 class="text-xl font-semibold text-blue-900 mb-2">Description</h2>
+    <p class="text-gray-700 whitespace-pre-wrap"><%= @exercise.description %></p>
+  </div>
+
+  <div class="bg-gray-100 border border-gray-300 rounded-lg p-4 mb-6" data-practice-editor-target="status">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="font-semibold text-gray-700">Status:</span>
+        <span class="text-gray-600">In Progress</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="font-semibold text-gray-700">Current Keystrokes:</span>
+        <span class="text-gray-600 font-mono" data-practice-editor-target="keystrokes">0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+    <div class="bg-white border border-gray-300 rounded-lg overflow-hidden">
+      <div class="bg-gray-100 px-4 py-2 border-b border-gray-300">
+        <h3 class="font-semibold text-gray-800">Vim Editor</h3>
+      </div>
+      <div class="p-4">
+        <div data-practice-editor-target="editor" class="border border-gray-300 rounded" style="height: 400px; overflow: auto; font-family: 'Courier New', monospace;"></div>
+      </div>
+    </div>
+
+    <div class="bg-white border border-green-200 rounded-lg overflow-hidden">
+      <div class="bg-green-100 px-4 py-2 border-b border-green-300">
+        <h3 class="font-semibold text-green-800">Target (Goal)</h3>
+      </div>
+      <pre class="p-4 overflow-x-auto text-sm font-mono bg-green-50" style="height: 400px; overflow: auto;"><%= @exercise.end_file %></pre>
+    </div>
+  </div>
+
+  <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+    <h3 class="text-lg font-semibold text-yellow-900 mb-2">Vim Tips</h3>
+    <ul class="text-gray-700 space-y-1 list-disc list-inside">
+      <li>Press <kbd class="px-2 py-1 bg-gray-200 rounded text-sm font-mono">i</kbd> to enter INSERT mode</li>
+      <li>Press <kbd class="px-2 py-1 bg-gray-200 rounded text-sm font-mono">Esc</kbd> to return to NORMAL mode</li>
+      <li>Use <kbd class="px-2 py-1 bg-gray-200 rounded text-sm font-mono">dd</kbd> to delete a line, <kbd class="px-2 py-1 bg-gray-200 rounded text-sm font-mono">yy</kbd> to copy, <kbd class="px-2 py-1 bg-gray-200 rounded text-sm font-mono">p</kbd> to paste</li>
+      <li>Transform the text in the editor to match the target exactly</li>
+      <li><strong>Auto-advance:</strong> You'll automatically move to the next exercise after completion (1.5s delay)</li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .cm-editor {
+    height: 100%;
+    font-size: 14px;
+    border: 1px solid #d1d5db;
+  }
+  .cm-scroller {
+    overflow: auto;
+    font-family: 'Courier New', Consolas, Monaco, monospace;
+  }
+  .cm-content {
+    padding: 8px;
+  }
+  .cm-line {
+    padding: 0 4px;
+  }
+</style>

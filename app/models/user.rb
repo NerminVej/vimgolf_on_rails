@@ -6,4 +6,6 @@ class User < ApplicationRecord
 
   # Associations
   has_many :exercises, dependent: :destroy
+  has_many :practice_sessions, dependent: :destroy
+  has_many :practice_attempts, through: :practice_sessions
 end
