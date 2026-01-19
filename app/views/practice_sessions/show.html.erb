@@ -1,13 +1,14 @@
-<div class="w-full h-screen flex flex-col"
+<div class="w-full flex flex-col"
      data-controller="practice-editor"
      data-practice-editor-start-content-value="<%= @exercise.start_file.to_json %>"
      data-practice-editor-target-content-value="<%= @exercise.end_file.to_json %>"
      data-practice-editor-attempt-id-value="<%= @current_attempt.id %>"
      data-practice-editor-session-id-value="<%= @session.id %>"
-     data-practice-editor-session-started-at-value="<%= @session.started_at.to_i %>">
+     data-practice-editor-session-started-at-value="<%= @session.started_at.to_i %>"
+     style="height: calc(100vh - 4rem);">
 
   <!-- Vim Editor at the TOP -->
-  <div class="flex-1 grid grid-cols-2 gap-0 overflow-hidden">
+  <div class="flex-1 grid grid-cols-2 gap-0 overflow-hidden pt-4">
     <div class="flex flex-col border-r border-gray-300">
       <div class="bg-gray-100 px-4 py-2 border-b border-gray-300">
         <h3 class="text-sm font-semibold text-gray-800">Your Editor</h3>
