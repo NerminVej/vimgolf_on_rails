@@ -1,27 +1,31 @@
-<div class="space-y-3 text-center text-sm">
+<div class="devise-links space-y-3 text-center text-sm">
   <%- if controller_name != 'sessions' %>
-    <%= link_to "Already have an account? Sign in", new_session_path(resource_name), class: "block text-blue-600 hover:text-blue-800 font-semibold" %>
+    <%= link_to new_session_path(resource_name), style: "display: block; font-weight: 600; color: var(--neon-blue);" do %>
+      Already have an account? <span style="color: var(--neon-purple);">Sign in →</span>
+    <% end %>
   <% end %>
 
   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-    <%= link_to "Don't have an account? Sign up", new_registration_path(resource_name), class: "block text-blue-600 hover:text-blue-800 font-semibold" %>
+    <%= link_to new_registration_path(resource_name), style: "display: block; font-weight: 600; color: var(--neon-blue);" do %>
+      Don't have an account? <span style="color: var(--neon-green);">Sign up →</span>
+    <% end %>
   <% end %>
 
   <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-    <%= link_to "Forgot your password?", new_password_path(resource_name), class: "block text-gray-600 hover:text-gray-800" %>
+    <%= link_to "Forgot your password?", new_password_path(resource_name), style: "display: block; color: var(--text-muted);" %>
   <% end %>
 
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-    <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: "block text-gray-600 hover:text-gray-800" %>
+    <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), style: "display: block; color: var(--text-muted);" %>
   <% end %>
 
   <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-    <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name), class: "block text-gray-600 hover:text-gray-800" %>
+    <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name), style: "display: block; color: var(--text-muted);" %>
   <% end %>
 
   <%- if devise_mapping.omniauthable? %>
     <%- resource_class.omniauth_providers.each do |provider| %>
-      <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "block w-full px-4 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition" %>
+      <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "btn-secondary", style: "width: 100%;" %>
     <% end %>
   <% end %>
 </div>

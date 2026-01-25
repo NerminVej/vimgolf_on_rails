@@ -1,57 +1,64 @@
-<div class="w-full h-screen flex flex-col" data-controller="vim-editor" data-vim-editor-start-content-value="<%= @exercise.start_file.to_json %>" data-vim-editor-target-content-value="<%= @exercise.end_file.to_json %>" data-vim-editor-exercise-id-value="<%= @exercise.id %>">
-  <div class="flex-1 grid grid-cols-2 gap-0 overflow-hidden">
-    <div class="flex flex-col border-r border-gray-300">
-      <div class="bg-gray-100 px-4 py-2 border-b border-gray-300">
-        <h3 class="text-sm font-semibold text-gray-800">Your Editor</h3>
-      </div>
-      <div class="flex-1 p-3">
-        <div data-vim-editor-target="editor" class="h-full" style="overflow: auto; font-family: 'Courier New', monospace;"></div>
-      </div>
-    </div>
+<div class="w-full h-screen flex flex-col px-6 py-4" data-controller="vim-editor" data-vim-editor-start-content-value="<%= @exercise.start_file.to_json %>" data-vim-editor-target-content-value="<%= @exercise.end_file.to_json %>" data-vim-editor-exercise-id-value="<%= @exercise.id %>" style="max-width: 1800px; margin: 0 auto;">
 
-    <div class="flex flex-col">
-      <div class="bg-green-100 px-4 py-2 border-b border-green-300">
-        <h3 class="text-sm font-semibold text-green-800">Target</h3>
-      </div>
-      <pre class="flex-1 p-3 overflow-auto text-sm font-mono bg-green-50"><%= @exercise.end_file %></pre>
-    </div>
-  </div>
-
-  <div class="bg-gray-50 border-t border-gray-300 px-6 py-3" data-vim-editor-target="status">
+  <!-- Header Info -->
+  <div class="hud-overlay mb-4 slide-in">
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-6">
-        <div class="text-sm text-gray-700">
-          <span class="font-semibold">Title:</span> <%= @exercise.title %>
+        <div>
+          <span class="stat-label">Challenge</span>
+          <h2 class="text-xl font-bold text-gradient"><%= @exercise.title %></h2>
         </div>
-        <div class="text-sm text-gray-700">
-          <span class="font-semibold">Description:</span> <%= @exercise.description %>
+        <div class="border-l border-gray-700 pl-6">
+          <span class="stat-label">Objective</span>
+          <p style="color: var(--text-secondary); font-size: 14px;"><%= @exercise.description %></p>
         </div>
       </div>
       <div class="flex items-center gap-4">
-        <div class="text-sm text-gray-700">
-          <span class="font-semibold">Keystrokes:</span>
-          <span class="font-mono font-semibold ml-1" data-vim-editor-target="keystrokes">0</span>
+        <div class="stat-box" style="min-width: 120px;">
+          <div class="stat-label">Keystrokes</div>
+          <div class="stat-value" data-vim-editor-target="keystrokes">0</div>
         </div>
-        <%= link_to "← Back", exercise_path(@exercise), class: "px-3 py-1 text-sm bg-gray-500 text-white rounded hover:bg-gray-600 transition" %>
+        <%= link_to exercise_path(@exercise), class: "btn-secondary" do %>
+          <span style="margin-right: 8px;">←</span>Back
+        <% end %>
       </div>
     </div>
   </div>
-</div>
 
-<style>
-  .cm-editor {
-    height: 100%;
-    font-size: 16px;
-    border: 1px solid #d1d5db;
-  }
-  .cm-scroller {
-    overflow: auto;
-    font-family: 'Courier New', Consolas, Monaco, monospace;
-  }
-  .cm-content {
-    padding: 12px;
-  }
-  .cm-line {
-    padding: 0 4px;
-  }
-</style>
+  <!-- Editors Grid -->
+  <div class="flex-1 grid grid-cols-2 gap-6 overflow-hidden slide-in" style="animation-delay: 0.1s;">
+    <!-- Vim Editor -->
+    <div class="vim-terminal">
+      <div class="vim-terminal-header">
+        <span class="vim-terminal-dot red"></span>
+        <span class="vim-terminal-dot yellow"></span>
+        <span class="vim-terminal-dot green"></span>
+        <span class="vim-terminal-title">~/vimgolf/exercise.txt - VIM</span>
+      </div>
+      <div class="vim-editor-wrapper">
+        <div data-vim-editor-target="editor" style="height: calc(100% - 28px);"></div>
+        <div class="vim-status-bar" data-vim-editor-target="status">
+          <div class="flex items-center gap-4">
+            <span class="vim-mode-indicator">NORMAL</span>
+            <span style="opacity: 0.7;">~/vimgolf/exercise.txt</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span>Ln 1, Col 1</span>
+            <span data-vim-editor-target="keystrokes">0 keys</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Target Editor -->
+    <div class="target-editor">
+      <div class="target-editor-header">
+        <div class="flex items-center justify-between">
+          <span>🎯 TARGET OUTPUT</span>
+          <span style="font-size: 12px; opacity: 0.7;">Transform your code to match this</span>
+        </div>
+      </div>
+      <pre class="target-editor-content"><%= @exercise.end_file %></pre>
+    </div>
+  </div>
+</div>

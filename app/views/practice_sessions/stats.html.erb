@@ -1,76 +1,94 @@
-<div class="max-w-6xl mx-auto">
-  <div class="text-center mb-8">
-    <h1 class="text-5xl font-bold text-purple-700 mb-3 pt-8">🎉 Practice Session Complete!</h1>
-    <p class="text-gray-600 text-lg">
+<div class="max-w-6xl mx-auto px-6 py-8">
+  <!-- Victory Header -->
+  <div class="text-center mb-10 slide-in">
+    <div style="font-size: 80px; margin-bottom: 20px; filter: drop-shadow(0 0 30px var(--neon-yellow));">🏆</div>
+    <h1 class="text-6xl font-bold mb-4" style="font-family: 'JetBrains Mono', monospace; background: linear-gradient(135deg, var(--neon-yellow) 0%, var(--neon-pink) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+      MISSION COMPLETE
+    </h1>
+    <p style="color: var(--text-secondary); font-size: 18px;">
       <% if @session.quit_reason == 'completed_all' %>
-        Congratulations! You completed all available exercises!
+        🎖️ Outstanding! You conquered all available challenges!
       <% elsif @session.quit_reason == 'manual_quit' %>
-        You ended the practice session. Great work!
+        💪 Solid session! You pushed your limits!
       <% else %>
-        Practice session ended.
+        ✨ Practice session concluded
       <% end %>
     </p>
   </div>
 
   <!-- Session Summary -->
-  <div class="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-xl p-8 mb-8 shadow-lg">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Session Summary</h2>
+  <div class="hud-overlay mb-10 slide-in" style="animation-delay: 0.1s; background: linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%); border-color: var(--neon-purple); padding: 32px;">
+    <h2 class="text-3xl font-bold mb-8 text-center text-gradient" style="font-family: 'JetBrains Mono', monospace;">PERFORMANCE STATS</h2>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-lg p-4 text-center shadow">
-        <div class="text-sm text-gray-600 mb-2">Exercises Completed</div>
-        <div class="text-4xl font-bold text-green-600"><%= @session.total_exercises_completed %></div>
+      <div class="stat-box pulse-glow" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.15) 100%);">
+        <div style="font-size: 32px; margin-bottom: 8px;">✅</div>
+        <div class="stat-value" style="background: linear-gradient(135deg, var(--neon-green) 0%, var(--neon-blue) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><%= @session.total_exercises_completed %></div>
+        <div class="stat-label">Completed</div>
       </div>
-      <div class="bg-white rounded-lg p-4 text-center shadow">
-        <div class="text-sm text-gray-600 mb-2">Total Attempts</div>
-        <div class="text-4xl font-bold text-blue-600"><%= @session.total_exercises_attempted %></div>
+      <div class="stat-box" style="background: linear-gradient(135deg, rgba(0, 217, 255, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);">
+        <div style="font-size: 32px; margin-bottom: 8px;">🎯</div>
+        <div class="stat-value"><%= @session.total_exercises_attempted %></div>
+        <div class="stat-label">Attempts</div>
       </div>
-      <div class="bg-white rounded-lg p-4 text-center shadow">
-        <div class="text-sm text-gray-600 mb-2">Total Keystrokes</div>
-        <div class="text-4xl font-bold text-purple-600"><%= @session.total_keystrokes %></div>
+      <div class="stat-box" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%);">
+        <div style="font-size: 32px; margin-bottom: 8px;">⌨️</div>
+        <div class="stat-value" style="background: linear-gradient(135deg, var(--neon-purple) 0%, var(--neon-pink) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><%= @session.total_keystrokes %></div>
+        <div class="stat-label">Total Keys</div>
       </div>
-      <div class="bg-white rounded-lg p-4 text-center shadow">
-        <div class="text-sm text-gray-600 mb-2">Session Duration</div>
-        <div class="text-4xl font-bold text-orange-600 font-mono">
+      <div class="stat-box" style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(239, 68, 68, 0.15) 100%);">
+        <div style="font-size: 32px; margin-bottom: 8px;">⏱️</div>
+        <div class="stat-value" style="background: linear-gradient(135deg, var(--neon-yellow) 0%, var(--neon-red) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
           <%= Time.at(@session.total_duration_seconds || 0).utc.strftime("%M:%S") %>
         </div>
+        <div class="stat-label">Duration</div>
       </div>
-      <div class="bg-white rounded-lg p-4 text-center shadow">
-        <div class="text-sm text-gray-600 mb-2">Avg Keystrokes</div>
-        <div class="text-4xl font-bold text-indigo-600"><%= @average_keystrokes %></div>
+      <div class="stat-box" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);">
+        <div style="font-size: 32px; margin-bottom: 8px;">📊</div>
+        <div class="stat-value"><%= @average_keystrokes %></div>
+        <div class="stat-label">Avg Keys</div>
       </div>
-      <div class="bg-white rounded-lg p-4 text-center shadow">
-        <div class="text-sm text-gray-600 mb-2">Success Rate</div>
-        <div class="text-4xl font-bold text-teal-600"><%= @success_rate %>%</div>
+      <div class="stat-box pulse-glow" style="background: linear-gradient(135deg, rgba(20, 184, 166, 0.15) 0%, rgba(16, 185, 129, 0.15) 100%); animation-delay: 0.5s;">
+        <div style="font-size: 32px; margin-bottom: 8px;">🎖️</div>
+        <div class="stat-value" style="background: linear-gradient(135deg, var(--neon-green) 0%, var(--neon-blue) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><%= @success_rate %>%</div>
+        <div class="stat-label">Success Rate</div>
       </div>
     </div>
   </div>
 
   <!-- Exercise Breakdown -->
-  <div class="bg-white border border-gray-300 rounded-xl p-8 mb-8 shadow-lg">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6">Exercise Breakdown</h2>
+  <div class="game-card mb-10 slide-in" style="animation-delay: 0.2s; padding: 32px;">
+    <h2 class="text-3xl font-bold mb-8 text-gradient" style="font-family: 'JetBrains Mono', monospace;">CHALLENGE LOG</h2>
 
     <% if @attempts.any? %>
       <div class="space-y-4">
         <% @attempts.each_with_index do |attempt, index| %>
-          <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition <%= attempt.success ? 'bg-green-50 border-green-300' : 'bg-gray-50' %>">
+          <div class="<%= attempt.success ? 'game-card' : 'hud-overlay' %> slide-in" style="padding: 20px; animation-delay: <%= 0.25 + (index * 0.05) %>s; <%= attempt.success ? 'border-color: var(--neon-green); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);' : '' %>">
             <div class="flex items-center justify-between">
-              <div class="flex-1">
-                <div class="flex items-center gap-3">
-                  <span class="text-2xl font-bold text-gray-400">#<%= index + 1 %></span>
+              <div class="flex-1 flex items-center gap-4">
+                <div style="width: 48px; height: 48px; border-radius: 8px; background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 20px; font-family: 'JetBrains Mono', monospace;">
+                  #<%= index + 1 %>
+                </div>
+                <div class="flex-1">
                   <% if attempt.exercise %>
-                    <h3 class="text-lg font-semibold text-gray-800">
-                      <%= link_to attempt.exercise.title, exercise_path(attempt.exercise), class: "hover:text-blue-600 transition" %>
+                    <h3 class="text-lg font-bold mb-1">
+                      <%= link_to attempt.exercise.title, exercise_path(attempt.exercise), style: "text-decoration: none; color: var(--neon-blue);" %>
                     </h3>
                   <% else %>
-                    <h3 class="text-lg font-semibold text-gray-500 italic">Exercise deleted</h3>
+                    <h3 class="text-lg font-bold mb-1" style="color: var(--text-muted); font-style: italic;">Exercise deleted</h3>
                   <% end %>
 
                   <% if attempt.success %>
-                    <span class="px-3 py-1 bg-green-500 text-white text-sm font-semibold rounded-full">✓ Completed</span>
+                    <div style="display: inline-block; padding: 4px 12px; background: linear-gradient(135deg, var(--neon-green) 0%, var(--neon-blue) 100%); border-radius: 20px; color: white; font-size: 12px; font-weight: 700;">
+                      ✓ COMPLETED
+                    </div>
                   <% elsif attempt.skipped %>
-                    <span class="px-3 py-1 bg-gray-400 text-white text-sm font-semibold rounded-full">Skipped</span>
+                    <div style="display: inline-block; padding: 4px 12px; background: rgba(255, 255, 255, 0.1); border-radius: 20px; color: var(--text-muted); font-size: 12px; font-weight: 700;">
+                      SKIPPED
+                    </div>
                   <% else %>
-                    <span class="px-3 py-1 bg-yellow-400 text-gray-800 text-sm font-semibold rounded-full">In Progress</span>
+                    <div style="display: inline-block; padding: 4px 12px; background: linear-gradient(135deg, var(--neon-yellow) 0%, var(--neon-red) 100%); border-radius: 20px; color: white; font-size: 12px; font-weight: 700;">
+                      IN PROGRESS
+                    </div>
                   <% end %>
                 </div>
               </div>
@@ -78,8 +96,8 @@
               <div class="flex items-center gap-6">
                 <% if attempt.duration_seconds %>
                   <div class="text-center">
-                    <div class="text-xs text-gray-500">Duration</div>
-                    <div class="text-lg font-semibold text-gray-700 font-mono">
+                    <div style="color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Time</div>
+                    <div style="color: var(--text-primary); font-size: 18px; font-weight: 700; font-family: 'JetBrains Mono', monospace;">
                       <%= Time.at(attempt.duration_seconds).utc.strftime("%M:%S") %>
                     </div>
                   </div>
@@ -87,8 +105,8 @@
 
                 <% if attempt.success %>
                   <div class="text-center">
-                    <div class="text-xs text-gray-500">Keystrokes</div>
-                    <div class="text-lg font-bold text-purple-600 font-mono"><%= attempt.keystrokes %></div>
+                    <div style="color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Keys</div>
+                    <div class="stat-value" style="font-size: 24px;"><%= attempt.keystrokes %></div>
                   </div>
                 <% end %>
               </div>
@@ -97,13 +115,17 @@
         <% end %>
       </div>
     <% else %>
-      <p class="text-gray-500 text-center py-8">No attempts recorded.</p>
+      <p style="color: var(--text-muted); text-align: center; padding: 40px 0; font-size: 16px;">No attempts recorded</p>
     <% end %>
   </div>
 
   <!-- Action Buttons -->
-  <div class="flex justify-center gap-4">
-    <%= button_to "🎯 Start New Practice Session", practice_sessions_path, method: :post, class: "px-8 py-4 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-bold text-lg shadow-lg" %>
-    <%= link_to "← Back to Exercises", exercises_path, class: "px-8 py-4 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition font-bold text-lg shadow-lg" %>
+  <div class="flex justify-center gap-4 slide-in" style="animation-delay: 0.3s;">
+    <%= button_to practice_sessions_path, method: :post, class: "btn-primary", style: "font-size: 18px; padding: 18px 36px; font-weight: 700;" do %>
+      <span style="margin-right: 10px;">⚡</span>New Practice Session
+    <% end %>
+    <%= link_to exercises_path, class: "btn-secondary", style: "font-size: 18px; padding: 18px 36px; font-weight: 700;" do %>
+      <span style="margin-right: 10px;">←</span>Browse Challenges
+    <% end %>
   </div>
 </div>

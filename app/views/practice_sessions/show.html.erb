@@ -1,98 +1,93 @@
-<div class="w-full flex flex-col"
+<div class="w-full flex flex-col px-6 py-4"
      data-controller="practice-editor"
      data-practice-editor-start-content-value="<%= @exercise.start_file.to_json %>"
      data-practice-editor-target-content-value="<%= @exercise.end_file.to_json %>"
      data-practice-editor-attempt-id-value="<%= @current_attempt.id %>"
      data-practice-editor-session-id-value="<%= @session.id %>"
      data-practice-editor-session-started-at-value="<%= @session.started_at.to_i %>"
-     style="height: calc(100vh - 4rem);">
+     style="height: calc(100vh - 4rem); max-width: 1800px; margin: 0 auto;">
 
-  <!-- Vim Editor at the TOP -->
-  <div class="flex-1 grid grid-cols-2 gap-0 overflow-hidden pt-4">
-    <div class="flex flex-col border-r border-gray-300">
-      <div class="bg-gray-100 px-4 py-2 border-b border-gray-300">
-        <h3 class="text-sm font-semibold text-gray-800">Your Editor</h3>
+  <!-- Session Stats HUD -->
+  <div class="hud-overlay mb-4 slide-in" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%); border-color: var(--neon-purple);">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-1">
+        <div class="stat-box" style="background: rgba(168, 85, 247, 0.1);">
+          <div class="stat-value" data-practice-editor-target="completedCount"><%= @session.total_exercises_completed %></div>
+          <div class="stat-label">Completed</div>
+        </div>
+        <div class="stat-box" style="background: rgba(236, 72, 153, 0.1);">
+          <div class="stat-value" data-practice-editor-target="attemptedCount"><%= @session.total_exercises_attempted %></div>
+          <div class="stat-label">Attempted</div>
+        </div>
+        <div class="stat-box" style="background: rgba(0, 217, 255, 0.1);">
+          <div class="stat-value" data-practice-editor-target="totalKeystrokes"><%= @session.total_keystrokes %></div>
+          <div class="stat-label">Total Keys</div>
+        </div>
+        <div class="stat-box" style="background: rgba(251, 191, 36, 0.1);">
+          <div class="stat-value" data-practice-editor-target="sessionTime" style="background: linear-gradient(135deg, var(--neon-yellow) 0%, var(--neon-green) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">00:00</div>
+          <div class="stat-label">Time Elapsed</div>
+        </div>
       </div>
-      <div class="flex-1 p-3">
-        <div data-practice-editor-target="editor" class="h-full" style="overflow: auto; font-family: 'Courier New', monospace;"></div>
-      </div>
-    </div>
-
-    <div class="flex flex-col">
-      <div class="bg-green-100 px-4 py-2 border-b border-green-300">
-        <h3 class="text-sm font-semibold text-green-800">Target</h3>
-      </div>
-      <pre class="flex-1 p-3 overflow-auto text-sm font-mono bg-green-50"><%= @exercise.end_file %></pre>
+      <%= button_to quit_practice_session_path(@session), method: :post, class: "btn-danger", data: { turbo_confirm: "Quit this practice session?" } do %>
+        <span style="margin-right: 8px;">✕</span>Quit Session
+      <% end %>
     </div>
   </div>
 
-  <!-- Session Stats, Description, and Status UNDER the editor -->
-  <div class="bg-white border-t border-gray-300">
-    <!-- Session Stats -->
-    <div class="bg-purple-50 border-b border-purple-200 px-6 py-3">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-6">
-          <div class="text-center">
-            <div class="text-xs text-gray-600">Completed</div>
-            <div class="text-lg font-bold text-purple-700" data-practice-editor-target="completedCount"><%= @session.total_exercises_completed %></div>
+  <!-- Challenge Info -->
+  <div class="hud-overlay mb-4 slide-in" style="animation-delay: 0.1s; padding: 16px;">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-6">
+        <div>
+          <span class="stat-label">Current Challenge</span>
+          <h2 class="text-lg font-bold text-gradient"><%= @exercise.title %></h2>
+        </div>
+        <div class="border-l border-gray-700 pl-6">
+          <span class="stat-label">Mission</span>
+          <p style="color: var(--text-secondary); font-size: 14px;"><%= @exercise.description %></p>
+        </div>
+      </div>
+      <div class="stat-box" style="min-width: 100px;">
+        <div class="stat-value" data-practice-editor-target="keystrokes">0</div>
+        <div class="stat-label">Keys Used</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Editors Grid -->
+  <div class="flex-1 grid grid-cols-2 gap-6 overflow-hidden slide-in" style="animation-delay: 0.2s;">
+    <!-- Vim Editor -->
+    <div class="vim-terminal">
+      <div class="vim-terminal-header">
+        <span class="vim-terminal-dot red"></span>
+        <span class="vim-terminal-dot yellow"></span>
+        <span class="vim-terminal-dot green"></span>
+        <span class="vim-terminal-title">~/practice/exercise.txt - VIM</span>
+      </div>
+      <div class="vim-editor-wrapper">
+        <div data-practice-editor-target="editor" style="height: calc(100% - 28px);"></div>
+        <div class="vim-status-bar" data-practice-editor-target="status">
+          <div class="flex items-center gap-4">
+            <span class="vim-mode-indicator">NORMAL</span>
+            <span style="opacity: 0.7;">~/practice/exercise.txt</span>
           </div>
-          <div class="text-center">
-            <div class="text-xs text-gray-600">Attempted</div>
-            <div class="text-lg font-bold text-purple-700" data-practice-editor-target="attemptedCount"><%= @session.total_exercises_attempted %></div>
-          </div>
-          <div class="text-center">
-            <div class="text-xs text-gray-600">Total Keystrokes</div>
-            <div class="text-lg font-bold text-purple-700" data-practice-editor-target="totalKeystrokes"><%= @session.total_keystrokes %></div>
-          </div>
-          <div class="text-center">
-            <div class="text-xs text-gray-600">Session Time</div>
-            <div class="text-lg font-bold text-purple-700 font-mono" data-practice-editor-target="sessionTime">00:00</div>
+          <div class="flex items-center gap-4">
+            <span>Ln 1, Col 1</span>
+            <span data-practice-editor-target="keystrokes">0 keys</span>
           </div>
         </div>
-        <%= button_to "✕ Quit", quit_practice_session_path(@session), method: :post, class: "px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition", data: { turbo_confirm: "Quit this practice session?" } %>
       </div>
     </div>
 
-    <!-- Description and Status -->
-    <div class="bg-gray-50 px-6 py-3" data-practice-editor-target="status">
-      <div class="flex items-center justify-between text-sm">
-        <div class="flex items-center gap-6">
-          <div>
-            <span class="font-semibold text-gray-700">Title:</span>
-            <span class="text-gray-600"><%= @exercise.title %></span>
-          </div>
-          <div>
-            <span class="font-semibold text-gray-700">Description:</span>
-            <span class="text-gray-600"><%= @exercise.description %></span>
-          </div>
-          <div>
-            <span class="font-semibold text-gray-700">Status:</span>
-            <span class="text-gray-600">In Progress</span>
-          </div>
-        </div>
-        <div>
-          <span class="font-semibold text-gray-700">Current Keystrokes:</span>
-          <span class="text-gray-600 font-mono ml-1" data-practice-editor-target="keystrokes">0</span>
+    <!-- Target Editor -->
+    <div class="target-editor">
+      <div class="target-editor-header">
+        <div class="flex items-center justify-between">
+          <span>🎯 TARGET OUTPUT</span>
+          <span style="font-size: 12px; opacity: 0.7;">Transform your code to match this</span>
         </div>
       </div>
+      <pre class="target-editor-content"><%= @exercise.end_file %></pre>
     </div>
   </div>
 </div>
-
-<style>
-  .cm-editor {
-    height: 100%;
-    font-size: 16px;
-    border: 1px solid #d1d5db;
-  }
-  .cm-scroller {
-    overflow: auto;
-    font-family: 'Courier New', Consolas, Monaco, monospace;
-  }
-  .cm-content {
-    padding: 12px;
-  }
-  .cm-line {
-    padding: 0 4px;
-  }
-</style>

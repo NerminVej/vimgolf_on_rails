@@ -1,71 +1,101 @@
-<div class="w-full">
-  <div class="flex justify-between items-center mb-6">
+<div class="w-full px-6 py-8" style="max-width: 1400px; margin: 0 auto;">
+  <div class="flex justify-between items-center mb-8 slide-in">
     <div>
-      <h1 class="text-4xl font-bold text-gray-800">VimGolf Exercises</h1>
+      <h1 class="text-5xl font-bold mb-2" style="font-family: 'JetBrains Mono', monospace;">
+        <span class="text-gradient">Challenges</span>
+      </h1>
       <% if @pagy.count > 0 %>
-        <p class="text-sm text-gray-600 mt-1">Showing <%= @pagy.from %>-<%= @pagy.to %> of <%= @pagy.count %> exercises</p>
+        <p style="color: var(--text-muted); font-size: 14px;">
+          Displaying <%= @pagy.from %>-<%= @pagy.to %> of <span style="color: var(--neon-blue); font-weight: 600;"><%= @pagy.count %></span> available exercises
+        </p>
       <% end %>
     </div>
-    <%= link_to "Create New Exercise", new_exercise_path, class: "px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-semibold" %>
+    <%= link_to new_exercise_path, class: "btn-primary" do %>
+      <span style="margin-right: 8px;">✨</span>Create New Challenge
+    <% end %>
   </div>
 
   <% if @exercises.any? %>
-    <!-- Desktop Table View -->
-    <div class="bg-white shadow-md rounded-lg overflow-hidden hidden md:block">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
-          <tr>
-            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Title</th>
-            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Description</th>
-            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Creator</th>
-            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Created</th>
-            <th class="px-6 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider">Actions</th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          <% @exercises.each do |exercise| %>
-            <tr class="hover:bg-gray-50 transition">
-              <td class="px-6 py-4 whitespace-nowrap">
-                <%= link_to exercise.title, exercise_path(exercise), class: "text-blue-600 hover:text-blue-800 font-semibold" %>
-              </td>
-              <td class="px-6 py-4">
-                <p class="text-sm text-gray-600 line-clamp-2"><%= truncate(exercise.description, length: 100) %></p>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                <%= exercise.user.email.split('@').first %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <%= time_ago_in_words(exercise.created_at) %> ago
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <div class="flex justify-end gap-2">
-                  <%= link_to "View", exercise_path(exercise), class: "text-blue-600 hover:text-blue-800" %>
-                  <% if exercise.user == current_user %>
-                    <%= link_to "Edit", edit_exercise_path(exercise), class: "text-yellow-600 hover:text-yellow-800" %>
-                    <%= button_to "Delete", exercise_path(exercise), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-800" %>
-                  <% end %>
-                </div>
-              </td>
+    <!-- Desktop View -->
+    <div class="hidden md:block">
+      <div class="game-table slide-in" style="animation-delay: 0.1s;">
+        <table>
+          <thead>
+            <tr>
+              <th>Challenge</th>
+              <th>Objective</th>
+              <th>Creator</th>
+              <th>Created</th>
+              <th style="text-align: right;">Actions</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @exercises.each_with_index do |exercise, index| %>
+              <tr style="animation: slide-in 0.5s ease-out; animation-delay: <%= 0.15 + (index * 0.05) %>s; animation-fill-mode: both;">
+                <td>
+                  <%= link_to exercise_path(exercise), style: "text-decoration: none; color: var(--neon-blue); font-weight: 600; display: flex; align-items: center; gap: 8px;" do %>
+                    <span style="font-size: 20px;">🎯</span>
+                    <span><%= exercise.title %></span>
+                  <% end %>
+                </td>
+                <td>
+                  <p style="color: var(--text-muted); font-size: 14px; max-width: 400px;"><%= truncate(exercise.description, length: 100) %></p>
+                </td>
+                <td>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px;">
+                      <%= exercise.user.email[0].upcase %>
+                    </div>
+                    <span style="color: var(--text-secondary); font-family: 'JetBrains Mono', monospace; font-size: 13px;">
+                      <%= exercise.user.email.split('@').first %>
+                    </span>
+                  </div>
+                </td>
+                <td>
+                  <span style="color: var(--text-muted); font-size: 13px;">
+                    <%= time_ago_in_words(exercise.created_at) %> ago
+                  </span>
+                </td>
+                <td>
+                  <div style="display: flex; justify-content: flex-end; gap: 8px;">
+                    <%= link_to "Play", exercise_path(exercise), class: "btn-success", style: "padding: 6px 12px; font-size: 13px; text-decoration: none;" %>
+                    <% if exercise.user == current_user %>
+                      <%= link_to "Edit", edit_exercise_path(exercise), class: "btn-secondary", style: "padding: 6px 12px; font-size: 13px; text-decoration: none;" %>
+                      <%= button_to "Delete", exercise_path(exercise), method: :delete, data: { turbo_confirm: "Delete this challenge?" }, class: "btn-danger", style: "padding: 6px 12px; font-size: 13px;" %>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <!-- Mobile Card View -->
-    <div class="space-y-3 md:hidden">
-      <% @exercises.each do |exercise| %>
-        <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-          <h3 class="font-semibold text-gray-800 mb-2">
-            <%= link_to exercise.title, exercise_path(exercise), class: "text-blue-600 hover:text-blue-800" %>
-          </h3>
-          <p class="text-sm text-gray-600 mb-2"><%= truncate(exercise.description, length: 80) %></p>
-          <div class="flex justify-between items-center text-xs text-gray-500">
-            <span><%= exercise.user.email.split('@').first %> • <%= time_ago_in_words(exercise.created_at) %> ago</span>
+    <div class="space-y-4 md:hidden">
+      <% @exercises.each_with_index do |exercise, index| %>
+        <div class="game-card slide-in" style="animation-delay: <%= 0.1 + (index * 0.05) %>s;">
+          <div class="flex items-start gap-3 mb-3">
+            <span style="font-size: 24px;">🎯</span>
+            <div class="flex-1">
+              <h3 class="font-bold mb-1" style="color: var(--neon-blue);">
+                <%= link_to exercise.title, exercise_path(exercise), style: "text-decoration: none; color: var(--neon-blue);" %>
+              </h3>
+              <p style="color: var(--text-muted); font-size: 13px;"><%= truncate(exercise.description, length: 80) %></p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-3" style="border-top: 1px solid rgba(255, 255, 255, 0.1);">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <div style="width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 11px;">
+                <%= exercise.user.email[0].upcase %>
+              </div>
+              <span style="color: var(--text-muted); font-size: 11px;"><%= exercise.user.email.split('@').first %> • <%= time_ago_in_words(exercise.created_at) %> ago</span>
+            </div>
             <% if exercise.user == current_user %>
               <div class="flex gap-2">
-                <%= link_to "Edit", edit_exercise_path(exercise), class: "text-yellow-600" %>
-                <%= button_to "Delete", exercise_path(exercise), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "text-red-600" %>
+                <%= link_to "Edit", edit_exercise_path(exercise), style: "color: var(--neon-yellow); font-size: 12px; text-decoration: none;" %>
+                <%= button_to "Delete", exercise_path(exercise), method: :delete, data: { turbo_confirm: "Delete?" }, style: "color: var(--neon-red); font-size: 12px; background: none; border: none; padding: 0; cursor: pointer;" %>
               </div>
             <% end %>
           </div>
@@ -74,13 +104,19 @@
     </div>
 
     <!-- Pagination -->
-    <div class="mt-6">
+    <div class="mt-8">
       <%= render "shared/pagy_nav", pagy: @pagy %>
     </div>
   <% else %>
-    <div class="bg-blue-50 border border-blue-200 rounded-lg p-8 text-center">
-      <p class="text-gray-700 text-lg mb-4">No exercises yet. Be the first to create one!</p>
-      <%= link_to "Create First Exercise", new_exercise_path, class: "px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-semibold inline-block" %>
+    <div class="game-card text-center slide-in" style="padding: 60px 40px;">
+      <div style="font-size: 64px; margin-bottom: 20px; filter: drop-shadow(0 0 20px var(--neon-blue));">🎮</div>
+      <h2 class="text-3xl font-bold mb-4 text-gradient">No Challenges Yet</h2>
+      <p style="color: var(--text-secondary); font-size: 16px; margin-bottom: 30px;">
+        Be the first to create a challenge and start the competition!
+      </p>
+      <%= link_to new_exercise_path, class: "btn-primary", style: "font-size: 16px; padding: 16px 32px;" do %>
+        <span style="margin-right: 8px;">✨</span>Create First Challenge
+      <% end %>
     </div>
   <% end %>
 </div>

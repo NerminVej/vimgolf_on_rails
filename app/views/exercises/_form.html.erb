@@ -2,11 +2,11 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <% if f.object.errors.any? %>
-    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
-      <h2 class="text-lg font-semibold text-red-800 mb-2">
-        <%= pluralize(f.object.errors.count, "error") %> prohibited this exercise from being saved:
+    <div class="flash-message error" style="margin-bottom: 24px;">
+      <h2 class="font-semibold mb-2" style="color: var(--neon-red); font-size: 16px;">
+        ⚠️ <%= pluralize(f.object.errors.count, "error") %> prevented this challenge from being saved:
       </h2>
-      <ul class="list-disc list-inside text-red-700">
+      <ul style="list-style: disc; padding-left: 24px; color: var(--text-secondary);">
         <% f.object.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
@@ -15,30 +15,32 @@
   <% end %>
 
   <%= f.input :title,
-              label: "Title",
+              label: "Challenge Title",
               placeholder: "e.g., Swap Variable Assignments",
               required: true,
               input_html: {
-                class: "w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 #{'border-red-500' if f.object.errors[:title].any?}"
+                class: "form-input #{'border-red-500' if f.object.errors[:title].any?}"
               },
-              label_html: { class: "block text-sm font-semibold text-gray-700 mb-2" },
+              label_html: { class: "form-label" },
               wrapper_html: { class: "mb-6" },
               hint: "3-200 characters",
-              error_html: { class: "text-sm text-red-600 mt-1 font-medium" } %>
+              hint_html: { style: "color: var(--text-muted); font-size: 12px; margin-top: 4px;" },
+              error_html: { style: "color: var(--neon-red); font-size: 13px; margin-top: 4px; font-weight: 600;" } %>
 
   <%= f.input :description,
               as: :text,
-              label: "Description",
+              label: "Mission Briefing",
               placeholder: "Describe the challenge and what needs to be accomplished...",
               required: true,
               input_html: {
                 rows: 4,
-                class: "w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 #{'border-red-500' if f.object.errors[:description].any?}"
+                class: "form-input #{'border-red-500' if f.object.errors[:description].any?}"
               },
-              label_html: { class: "block text-sm font-semibold text-gray-700 mb-2" },
+              label_html: { class: "form-label" },
               wrapper_html: { class: "mb-6" },
               hint: "10-2000 characters",
-              error_html: { class: "text-sm text-red-600 mt-1 font-medium" } %>
+              hint_html: { style: "color: var(--text-muted); font-size: 12px; margin-top: 4px;" },
+              error_html: { style: "color: var(--neon-red); font-size: 13px; margin-top: 4px; font-weight: 600;" } %>
 
   <%= f.input :start_file,
               as: :text,
@@ -47,29 +49,33 @@
               required: true,
               input_html: {
                 rows: 10,
-                class: "w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm #{'border-red-500' if f.object.errors[:start_file].any?}"
+                class: "form-input #{'border-red-500' if f.object.errors[:start_file].any?}",
+                style: "font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6;"
               },
-              label_html: { class: "block text-sm font-semibold text-gray-700 mb-2" },
+              label_html: { class: "form-label" },
               wrapper_html: { class: "mb-6" },
               hint: "The initial state of the file that users will start with.",
-              error_html: { class: "text-sm text-red-600 mt-1 font-medium" } %>
+              hint_html: { style: "color: var(--text-muted); font-size: 12px; margin-top: 4px;" },
+              error_html: { style: "color: var(--neon-red); font-size: 13px; margin-top: 4px; font-weight: 600;" } %>
 
   <%= f.input :end_file,
               as: :text,
-              label: "End File (Goal State)",
+              label: "End File (Target State) 🎯",
               placeholder: "Enter the target content...",
               required: true,
               input_html: {
                 rows: 10,
-                class: "w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 font-mono text-sm #{'border-red-500' if f.object.errors[:end_file].any?}"
+                class: "form-input #{'border-red-500' if f.object.errors[:end_file].any?}",
+                style: "font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6; border-color: var(--neon-green);"
               },
-              label_html: { class: "block text-sm font-semibold text-gray-700 mb-2" },
+              label_html: { class: "form-label", style: "color: var(--neon-green);" },
               wrapper_html: { class: "mb-6" },
               hint: "The desired final state after Vim transformations.",
-              error_html: { class: "text-sm text-red-600 mt-1 font-medium" } %>
+              hint_html: { style: "color: var(--text-muted); font-size: 12px; margin-top: 4px;" },
+              error_html: { style: "color: var(--neon-red); font-size: 13px; margin-top: 4px; font-weight: 600;" } %>
 
-  <div class="flex gap-3">
-    <%= f.submit class: "px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-semibold cursor-pointer" %>
-    <%= link_to "Cancel", exercises_path, class: "px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition font-semibold" %>
+  <div class="flex gap-4">
+    <%= f.submit class: "btn-primary", style: "cursor: pointer; padding: 14px 28px; font-size: 16px;" %>
+    <%= link_to "Cancel", exercises_path, class: "btn-secondary", style: "padding: 14px 28px; font-size: 16px; text-decoration: none; display: inline-block;" %>
   </div>
 <% end %>

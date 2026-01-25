@@ -1,47 +1,109 @@
-<div class="w-full">
-  <div class="flex justify-between items-center mb-6">
-    <h1 class="text-4xl font-bold text-gray-800"><%= @exercise.title %></h1>
-    <div class="flex gap-2">
-      <%= link_to "Play Exercise", play_exercise_path(@exercise), class: "px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition" %>
-      <%= link_to "← Back to Exercises", exercises_path, class: "px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition" %>
-      <% if @exercise.user == current_user %>
-        <%= link_to "Edit", edit_exercise_path(@exercise), class: "px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition" %>
-        <%= button_to "Delete", exercise_path(@exercise), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition" %>
-      <% end %>
+<div class="w-full px-6 py-8" style="max-width: 1400px; margin: 0 auto;">
+  <!-- Header Section -->
+  <div class="hud-overlay mb-6 slide-in">
+    <div class="flex justify-between items-start">
+      <div>
+        <div class="flex items-center gap-3 mb-2">
+          <span style="font-size: 32px; filter: drop-shadow(0 0 10px var(--neon-blue));">🎯</span>
+          <h1 class="text-4xl font-bold text-gradient" style="font-family: 'JetBrains Mono', monospace;">
+            <%= @exercise.title %>
+          </h1>
+        </div>
+        <div class="flex items-center gap-4" style="margin-top: 12px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
+              <%= @exercise.user.email[0].upcase %>
+            </div>
+            <span style="color: var(--text-muted); font-size: 13px;">
+              Created by <span style="color: var(--neon-blue); font-weight: 600;"><%= @exercise.user.email.split('@').first %></span>
+            </span>
+          </div>
+          <span style="color: var(--text-muted); font-size: 13px;">•</span>
+          <span style="color: var(--text-muted); font-size: 13px;">
+            <%= @exercise.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+          </span>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <%= link_to play_exercise_path(@exercise), class: "btn-success", style: "font-size: 16px; display: inline-flex; align-items: center;" do %>
+          <span style="margin-right: 8px;">⚡</span>Play Challenge
+        <% end %>
+        <%= link_to exercises_path, class: "btn-secondary" do %>
+          <span style="margin-right: 8px;">←</span>Back
+        <% end %>
+        <% if @exercise.user == current_user %>
+          <%= link_to edit_exercise_path(@exercise), class: "btn-secondary" do %>
+            <span style="margin-right: 8px;">✏️</span>Edit
+          <% end %>
+          <%= button_to exercise_path(@exercise), method: :delete, data: { turbo_confirm: "Delete this challenge forever?" }, class: "btn-danger" do %>
+            <span style="margin-right: 8px;">🗑</span>Delete
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 
-  <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
-    <h2 class="text-xl font-semibold text-blue-900 mb-2">Description</h2>
-    <p class="text-gray-700 whitespace-pre-wrap"><%= @exercise.description %></p>
-  </div>
-
-  <div class="flex items-center gap-4 text-sm text-gray-500 mb-6">
-    <span>Created by <strong><%= @exercise.user.email %></strong></span>
-    <span>•</span>
-    <span><%= @exercise.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
-  </div>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <!-- Start File -->
-    <div class="bg-white border border-gray-300 rounded-lg overflow-hidden">
-      <div class="bg-gray-100 px-4 py-2 border-b border-gray-300">
-        <h3 class="font-semibold text-gray-800">Start File</h3>
+  <!-- Mission Briefing -->
+  <div class="game-card mb-6 slide-in" style="animation-delay: 0.1s;">
+    <div class="flex items-start gap-4">
+      <div style="font-size: 48px; filter: drop-shadow(0 0 15px var(--neon-yellow));">📋</div>
+      <div class="flex-1">
+        <h2 class="text-2xl font-bold mb-3" style="color: var(--text-primary);">Mission Briefing</h2>
+        <p style="color: var(--text-secondary); font-size: 16px; line-height: 1.8; white-space: pre-wrap;"><%= @exercise.description %></p>
       </div>
-      <pre class="p-4 overflow-x-auto text-sm font-mono bg-gray-50"><%= @exercise.start_file %></pre>
+    </div>
+  </div>
+
+  <!-- Code Preview Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 slide-in" style="animation-delay: 0.2s;">
+    <!-- Start File -->
+    <div class="vim-terminal">
+      <div class="vim-terminal-header">
+        <span class="vim-terminal-dot red"></span>
+        <span class="vim-terminal-dot yellow"></span>
+        <span class="vim-terminal-dot green"></span>
+        <span class="vim-terminal-title">start.txt - INITIAL STATE</span>
+      </div>
+      <div style="background-color: var(--vim-bg); padding: 20px; min-height: 300px;">
+        <div style="color: var(--text-muted); font-size: 12px; margin-bottom: 12px; font-weight: 600;">Starting Point:</div>
+        <pre style="color: var(--vim-fg); font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6; margin: 0; overflow-x: auto;"><%= @exercise.start_file %></pre>
+      </div>
     </div>
 
     <!-- End File -->
-    <div class="bg-white border border-green-200 rounded-lg overflow-hidden">
-      <div class="bg-green-100 px-4 py-2 border-b border-green-300">
-        <h3 class="font-semibold text-green-800">End File (Goal)</h3>
+    <div class="target-editor">
+      <div class="target-editor-header">
+        <div class="flex items-center justify-between">
+          <span>🎯 TARGET STATE</span>
+          <span style="font-size: 12px; opacity: 0.7;">Your goal</span>
+        </div>
       </div>
-      <pre class="p-4 overflow-x-auto text-sm font-mono bg-green-50"><%= @exercise.end_file %></pre>
+      <div style="background-color: #1a2332; padding: 20px; min-height: 300px;">
+        <div style="color: var(--neon-green); font-size: 12px; margin-bottom: 12px; font-weight: 600;">Target Result:</div>
+        <pre class="target-editor-content" style="margin: 0;"><%= @exercise.end_file %></pre>
+      </div>
     </div>
   </div>
 
-  <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mt-6">
-    <h3 class="text-lg font-semibold text-yellow-900 mb-2">Challenge</h3>
-    <p class="text-gray-700">Transform the <strong>Start File</strong> into the <strong>End File</strong> using Vim commands with the minimum number of keystrokes!</p>
+  <!-- Challenge Objective -->
+  <div class="game-card slide-in" style="animation-delay: 0.3s; background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%); border-color: var(--neon-yellow);">
+    <div class="flex items-start gap-4">
+      <div style="font-size: 48px; filter: drop-shadow(0 0 15px var(--neon-yellow));">⚔️</div>
+      <div>
+        <h3 class="text-2xl font-bold mb-3" style="background: linear-gradient(135deg, var(--neon-yellow) 0%, var(--neon-red) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          Your Challenge
+        </h3>
+        <p style="color: var(--text-primary); font-size: 16px; line-height: 1.8;">
+          Transform the <strong style="color: var(--neon-blue);">Start File</strong> into the
+          <strong style="color: var(--neon-green);">Target State</strong> using Vim commands with the
+          <strong style="color: var(--neon-yellow);">minimum number of keystrokes</strong> possible!
+        </p>
+        <div class="mt-6">
+          <%= link_to play_exercise_path(@exercise), class: "btn-primary", style: "font-size: 16px; padding: 14px 28px;" do %>
+            <span style="margin-right: 8px;">⚡</span>Accept Challenge
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

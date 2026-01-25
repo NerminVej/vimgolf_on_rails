@@ -1,18 +1,103 @@
-<div class="w-full">
-  <h1 class="text-4xl font-bold text-gray-800 mb-4">Welcome to Vimgolf!</h1>
-  <p class="text-lg text-gray-600 mb-8">
-    Hello <%= current_user.email %>, you are successfully logged in.
-  </p>
+<div class="w-full px-6 py-8" style="max-width: 1400px; margin: 0 auto;">
+  <!-- Hero Section -->
+  <div class="slide-in mb-8">
+    <div class="text-center mb-12">
+      <h1 class="text-6xl font-bold mb-4" style="font-family: 'JetBrains Mono', monospace;">
+        <span style="color: var(--neon-blue);">Welcome</span>
+        <span style="color: var(--text-primary);"> to </span>
+        <span class="text-gradient">VimGolf</span>
+      </h1>
+      <p class="text-xl" style="color: var(--text-secondary);">
+        Master your Vim skills, <span style="color: var(--neon-purple); font-weight: 600;"><%= current_user.email.split('@').first %></span>
+      </p>
+      <div class="mt-6 flex items-center justify-center gap-4">
+        <div class="w-3 h-3 rounded-full pulse-glow" style="background: var(--neon-green);"></div>
+        <span style="color: var(--text-muted); font-size: 14px;">System Online</span>
+      </div>
+    </div>
+  </div>
 
-  <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-    <h2 class="text-2xl font-semibold text-blue-900 mb-4">Getting Started</h2>
-    <p class="text-gray-700 mb-4">
-      This is your home page. You can customize it with your Vimgolf challenges and features.
-    </p>
-    <ul class="list-disc list-inside text-gray-700 space-y-2">
-      <li>Complete Vim challenges</li>
-      <li>Track your progress</li>
-      <li>Compete with other players</li>
-    </ul>
+  <!-- Action Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 slide-in" style="animation-delay: 0.1s;">
+    <!-- Practice Mode Card -->
+    <%= button_to practice_sessions_path, method: :post, class: "game-card text-left hover:scale-105 transition-transform", style: "cursor: pointer; border: none; width: 100%; display: block;" do %>
+      <div class="flex items-start gap-4">
+        <div style="font-size: 48px; filter: drop-shadow(0 0 10px var(--neon-purple));">⚡</div>
+        <div>
+          <h3 class="text-2xl font-bold mb-2 text-gradient">Practice Mode</h3>
+          <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+            Jump into random exercises and sharpen your Vim skills. Track your progress in real-time.
+          </p>
+          <div class="mt-4 inline-block px-4 py-2 rounded-lg" style="background: linear-gradient(135deg, var(--neon-purple) 0%, var(--neon-pink) 100%); color: white; font-weight: 600; font-size: 14px;">
+            Start Session →
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- Browse Exercises Card -->
+    <%= link_to exercises_path, class: "game-card hover:scale-105 transition-transform", style: "text-decoration: none; display: block;" do %>
+      <div class="flex items-start gap-4">
+        <div style="font-size: 48px; filter: drop-shadow(0 0 10px var(--neon-blue));">📚</div>
+        <div>
+          <h3 class="text-2xl font-bold mb-2 text-gradient">Browse Exercises</h3>
+          <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+            Explore all available challenges. Find the perfect exercise to level up your skills.
+          </p>
+          <div class="mt-4 inline-block px-4 py-2 rounded-lg" style="background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%); color: white; font-weight: 600; font-size: 14px;">
+            View All →
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- Create Challenge Card -->
+    <%= link_to new_exercise_path, class: "game-card hover:scale-105 transition-transform", style: "text-decoration: none; display: block;" do %>
+      <div class="flex items-start gap-4">
+        <div style="font-size: 48px; filter: drop-shadow(0 0 10px var(--neon-green));">✨</div>
+        <div>
+          <h3 class="text-2xl font-bold mb-2 text-gradient">Create Challenge</h3>
+          <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+            Design your own Vim challenges and share them with the community.
+          </p>
+          <div class="mt-4 inline-block px-4 py-2 rounded-lg" style="background: linear-gradient(135deg, var(--neon-green) 0%, var(--neon-blue) 100%); color: white; font-weight: 600; font-size: 14px;">
+            Create New →
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Info Section -->
+  <div class="game-card slide-in" style="animation-delay: 0.2s;">
+    <div class="flex items-start gap-6">
+      <div style="font-size: 64px; filter: drop-shadow(0 0 15px var(--neon-yellow));">🎯</div>
+      <div>
+        <h2 class="text-3xl font-bold mb-4" style="color: var(--text-primary);">
+          What is <span class="text-gradient">VimGolf</span>?
+        </h2>
+        <p style="color: var(--text-secondary); font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+          VimGolf is a competitive coding game where you transform text using Vim commands with the minimum number of keystrokes.
+          It's the ultimate test of your Vim mastery and efficiency.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="stat-box">
+            <div style="font-size: 32px; margin-bottom: 8px;">🏆</div>
+            <div class="stat-label">Complete Challenges</div>
+            <p style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">Win with fewer keystrokes</p>
+          </div>
+          <div class="stat-box">
+            <div style="font-size: 32px; margin-bottom: 8px;">📈</div>
+            <div class="stat-label">Track Progress</div>
+            <p style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">Monitor your improvement</p>
+          </div>
+          <div class="stat-box">
+            <div style="font-size: 32px; margin-bottom: 8px;">🎮</div>
+            <div class="stat-label">Compete</div>
+            <p style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">Challenge other players</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

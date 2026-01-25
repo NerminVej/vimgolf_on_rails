@@ -1,5 +1,13 @@
-<div class="w-full max-w-4xl mx-auto">
-  <h1 class="text-4xl font-bold text-gray-800 mb-6">Create New Exercise</h1>
+<div class="w-full max-w-4xl mx-auto px-6 py-8">
+  <div class="text-center mb-8 slide-in">
+    <div style="font-size: 64px; margin-bottom: 16px; filter: drop-shadow(0 0 20px var(--neon-green));">✨</div>
+    <h1 class="text-5xl font-bold mb-2 text-gradient" style="font-family: 'JetBrains Mono', monospace;">
+      Create Challenge
+    </h1>
+    <p style="color: var(--text-muted); font-size: 16px;">Design a new Vim challenge for the community</p>
+  </div>
 
-  <%= render "form", exercise: @exercise %>
+  <div class="game-card slide-in" style="animation-delay: 0.1s; padding: 40px;">
+    <%= render "form", exercise: @exercise %>
+  </div>
 </div>
