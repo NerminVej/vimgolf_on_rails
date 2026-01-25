@@ -11,7 +11,7 @@
 
       <% if user_signed_in? %>
         <div class="flex items-center gap-4">
-          <%= link_to "Exercises", exercises_path, class: "text-gray-300 hover:text-white font-semibold transition-all hover:text-shadow relative group" do %>
+          <%= link_to exercises_path, class: "text-gray-300 hover:text-white font-semibold transition-all hover:text-shadow relative group" do %>
             <span>Exercises</span>
             <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300"></span>
           <% end %>
