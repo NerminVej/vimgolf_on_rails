@@ -496,8 +496,14 @@ main {
   border-spacing: 0;
   background: rgba(17, 24, 39, 0.6);
   border-radius: 12px;
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid var(--border-primary);
+  table-layout: auto;
+}
+
+.game-table table {
+  width: 100%;
+  table-layout: auto;
 }
 
 .game-table thead {
@@ -513,6 +519,28 @@ main {
   font-size: 12px;
   letter-spacing: 1px;
   border-bottom: 2px solid var(--border-primary);
+  white-space: nowrap;
+}
+
+.game-table th:nth-child(1) {
+  width: 20%;
+}
+
+.game-table th:nth-child(2) {
+  width: 35%;
+}
+
+.game-table th:nth-child(3) {
+  width: 15%;
+}
+
+.game-table th:nth-child(4) {
+  width: 12%;
+}
+
+.game-table th:nth-child(5) {
+  width: 18%;
+  min-width: 200px;
 }
 
 .game-table td {
