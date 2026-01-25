@@ -1,0 +1,775 @@
+exercises:
+  # === BASIC MOTIONS AND EDITING ===
+
+  - title: "Delete Inside Parentheses"
+    description: |
+      Delete everything inside the parentheses while keeping the parentheses themselves.
+      Practice using text objects!
+    start_file: |
+      function(old content here)
+    end_file: |
+      function()
+
+  - title: "Change Word to Another"
+    description: |
+      Change the word 'cat' to 'dog' using the change command.
+      This is faster than delete and insert!
+    start_file: |
+      The cat sat on the mat.
+    end_file: |
+      The dog sat on the mat.
+
+  - title: "Delete Until Character"
+    description: |
+      Delete from the cursor position up to (but not including) the '@' character.
+      Learn to use motion commands with operators!
+    start_file: |
+      username@example.com
+    end_file: |
+      @example.com
+
+  - title: "Join Two Lines"
+    description: |
+      Join the two lines together with a single space between them.
+      There's a single command for this in Vim!
+    start_file: |
+      Hello
+      World
+    end_file: |
+      Hello World
+
+  - title: "Add Prefix to Multiple Lines"
+    description: |
+      Add '> ' at the beginning of each line to make it a quote.
+      Practice visual block mode or macros!
+    start_file: |
+      This is line one
+      This is line two
+      This is line three
+    end_file: |
+      > This is line one
+      > This is line two
+      > This is line three
+
+  # === SEARCH AND REPLACE ===
+
+  - title: "Replace All Occurrences"
+    description: |
+      Replace all occurrences of 'foo' with 'bar' throughout the entire file.
+      Learn the substitute command!
+    start_file: |
+      foo is here
+      another foo
+      foo foo foo
+    end_file: |
+      bar is here
+      another bar
+      bar bar bar
+
+  - title: "Remove All Numbers"
+    description: |
+      Delete all digit characters from the file.
+      Use a search pattern with substitute!
+    start_file: |
+      Item1: apple
+      Item2: banana
+      Item3: cherry
+    end_file: |
+      Item: apple
+      Item: banana
+      Item: cherry
+
+  - title: "Swap Two Words Globally"
+    description: |
+      Swap 'left' with 'right' throughout the file.
+      This requires a clever substitution strategy!
+    start_file: |
+      Turn left then right
+      Left is not right
+    end_file: |
+      Turn right then left
+      Right is not left
+
+  - title: "Add Line Numbers"
+    description: |
+      Add line numbers (1., 2., 3., etc.) to the beginning of each line.
+      Great for learning macros with counters!
+    start_file: |
+      First item
+      Second item
+      Third item
+      Fourth item
+    end_file: |
+      1. First item
+      2. Second item
+      3. Third item
+      4. Fourth item
+
+  - title: "Convert Spaces to Underscores"
+    description: |
+      Replace all spaces with underscores in the variable names.
+      Practice substitution with patterns!
+    start_file: |
+      my variable name
+      another variable here
+      third one too
+    end_file: |
+      my_variable_name
+      another_variable_here
+      third_one_too
+
+  # === TEXT OBJECTS AND BLOCKS ===
+
+  - title: "Delete Inside Quotes"
+    description: |
+      Delete the content inside the double quotes but keep the quotes.
+      Text objects make this easy!
+    start_file: |
+      message = "delete this text"
+    end_file: |
+      message = ""
+
+  - title: "Change Tag Content"
+    description: |
+      Change the content inside the HTML tag.
+      Learn about tag text objects!
+    start_file: |
+      <div>Old Content</div>
+    end_file: |
+      <div>New Content</div>
+
+  - title: "Delete Around Brackets"
+    description: |
+      Delete the brackets and everything inside them.
+      Practice the 'around' text object!
+    start_file: |
+      result = calculate[1, 2, 3]
+    end_file: |
+      result = calculate
+
+  - title: "Surround Word with Quotes"
+    description: |
+      Surround the word 'hello' with double quotes.
+      You can do this multiple ways!
+    start_file: |
+      print hello
+    end_file: |
+      print "hello"
+
+  - title: "Extract from Nested Parentheses"
+    description: |
+      Remove the outer parentheses layer but keep the inner content.
+      Navigate text objects carefully!
+    start_file: |
+      ((inner content))
+    end_file: |
+      (inner content)
+
+  # === MACROS AND REPETITION ===
+
+  - title: "Comment Out Lines"
+    description: |
+      Add '//' at the beginning of each line to comment them out.
+      Perfect for macro practice!
+    start_file: |
+      let x = 10
+      let y = 20
+      let z = 30
+    end_file: |
+      // let x = 10
+      // let y = 20
+      // let z = 30
+
+  - title: "Add Commas to List"
+    description: |
+      Add a comma at the end of each line except the last.
+      Macros with conditional logic!
+    start_file: |
+      apple
+      banana
+      cherry
+      date
+    end_file: |
+      apple,
+      banana,
+      cherry,
+      date
+
+  - title: "Increment Numbers"
+    description: |
+      Increment each number by 1.
+      Use Vim's increment command with macros!
+    start_file: |
+      Step 0
+      Step 1
+      Step 2
+      Step 3
+    end_file: |
+      Step 1
+      Step 2
+      Step 3
+      Step 4
+
+  - title: "Wrap Each Line in Function"
+    description: |
+      Wrap each word in a print() function call.
+      Excellent macro exercise!
+    start_file: |
+      hello
+      world
+      test
+    end_file: |
+      print(hello)
+      print(world)
+      print(test)
+
+  - title: "Create CSV from List"
+    description: |
+      Convert the list into a single line CSV.
+      Join lines with specific separator!
+    start_file: |
+      red
+      green
+      blue
+      yellow
+    end_file: |
+      red,green,blue,yellow
+
+  # === VISUAL MODE OPERATIONS ===
+
+  - title: "Indent Code Block"
+    description: |
+      Indent all lines by one level (2 spaces).
+      Visual mode makes this efficient!
+    start_file: |
+      if (condition) {
+      doSomething()
+      doMore()
+      }
+    end_file: |
+      if (condition) {
+        doSomething()
+        doMore()
+      }
+
+  - title: "Uppercase First Letters"
+    description: |
+      Make the first letter of each line uppercase.
+      Combine visual block mode with case change!
+    start_file: |
+      apple
+      banana
+      cherry
+    end_file: |
+      Apple
+      Banana
+      Cherry
+
+  - title: "Box Comment"
+    description: |
+      Create a box comment around the text with asterisks.
+      Visual block mode is your friend!
+    start_file: |
+      Important note
+      Remember this
+      Don't forget
+    end_file: |
+      /*********************
+       * Important note
+       * Remember this
+       * Don't forget
+       *********************/
+
+  - title: "Align Equals Signs"
+    description: |
+      Align all the equals signs in a column.
+      Use visual block insert!
+    start_file: |
+      name = "John"
+      age = 25
+      city = "NYC"
+    end_file: |
+      name     = "John"
+      age      = 25
+      city     = "NYC"
+
+  - title: "Add Bullets to List"
+    description: |
+      Add a bullet point '- ' to the beginning of each line.
+      Visual block mode makes this quick!
+    start_file: |
+      First item
+      Second item
+      Third item
+    end_file: |
+      - First item
+      - Second item
+      - Third item
+
+  # === LINE OPERATIONS ===
+
+  - title: "Move Line Down"
+    description: |
+      Move the first line to become the last line.
+      Learn line motion commands!
+    start_file: |
+      Move me down
+      Line 2
+      Line 3
+      Line 4
+    end_file: |
+      Line 2
+      Line 3
+      Line 4
+      Move me down
+
+  - title: "Delete Duplicate Lines"
+    description: |
+      Remove the duplicate consecutive lines.
+      Keep only unique adjacent lines!
+    start_file: |
+      apple
+      apple
+      banana
+      banana
+      banana
+      cherry
+    end_file: |
+      apple
+      banana
+      cherry
+
+  - title: "Copy First Line to End"
+    description: |
+      Copy the first line and paste it at the end.
+      Practice yank and paste with line motions!
+    start_file: |
+      header line
+      line 2
+      line 3
+    end_file: |
+      header line
+      line 2
+      line 3
+      header line
+
+  - title: "Reverse Every Two Lines"
+    description: |
+      Swap each pair of lines (1<->2, 3<->4, etc.).
+      Combine multiple commands efficiently!
+    start_file: |
+      Line A
+      Line B
+      Line C
+      Line D
+    end_file: |
+      Line B
+      Line A
+      Line D
+      Line C
+
+  - title: "Delete Lines Containing Pattern"
+    description: |
+      Delete all lines that contain the word 'delete'.
+      Use the global command!
+    start_file: |
+      Keep this line
+      delete this line
+      Keep this too
+      delete this also
+      Final keep
+    end_file: |
+      Keep this line
+      Keep this too
+      Final keep
+
+  # === CODE-SPECIFIC CHALLENGES ===
+
+  - title: "Convert to Arrow Function"
+    description: |
+      Convert the traditional function to an ES6 arrow function.
+      Multiple edits required!
+    start_file: |
+      function add(a, b) {
+        return a + b;
+      }
+    end_file: |
+      const add = (a, b) => {
+        return a + b;
+      };
+
+  - title: "Add Return Type TypeScript"
+    description: |
+      Add the return type annotation to the TypeScript function.
+      Precision editing practice!
+    start_file: |
+      function getName(id: number) {
+        return "John";
+      }
+    end_file: |
+      function getName(id: number): string {
+        return "John";
+      }
+
+  - title: "Convert Single to Double Quotes"
+    description: |
+      Convert all single quotes to double quotes in the code.
+      Be careful not to break the strings!
+    start_file: |
+      const name = 'John';
+      const city = 'NYC';
+      const msg = 'Hello';
+    end_file: |
+      const name = "John";
+      const city = "NYC";
+      const msg = "Hello";
+
+  - title: "Add Trailing Commas"
+    description: |
+      Add trailing commas to each property in the object.
+      Modern JavaScript best practice!
+    start_file: |
+      const obj = {
+        name: "John",
+        age: 30,
+        city: "NYC"
+      };
+    end_file: |
+      const obj = {
+        name: "John",
+        age: 30,
+        city: "NYC",
+      };
+
+  - title: "Extract Variable Name"
+    description: |
+      Extract just the variable name from each declaration.
+      Delete everything except the identifier!
+    start_file: |
+      const userName = "John";
+      let userAge = 30;
+      var userCity = "NYC";
+    end_file: |
+      userName
+      userAge
+      userCity
+
+  # === ADVANCED TEXT MANIPULATION ===
+
+  - title: "Snake Case to Camel Case"
+    description: |
+      Convert snake_case variable names to camelCase.
+      Complex substitution pattern needed!
+    start_file: |
+      user_name
+      user_age
+      user_email_address
+    end_file: |
+      userName
+      userAge
+      userEmailAddress
+
+  - title: "Create HTML List"
+    description: |
+      Wrap each item in <li> tags and surround all with <ul> tags.
+      Multiple steps required!
+    start_file: |
+      Apple
+      Banana
+      Cherry
+    end_file: |
+      <ul>
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Cherry</li>
+      </ul>
+
+  - title: "Transpose Matrix"
+    description: |
+      Transpose the rows and columns (swap them).
+      This is a brain teaser!
+    start_file: |
+      1 2 3
+      4 5 6
+      7 8 9
+    end_file: |
+      1 4 7
+      2 5 8
+      3 6 9
+
+  - title: "Extract Email Usernames"
+    description: |
+      Extract just the username part from each email address.
+      Delete from @ to the end!
+    start_file: |
+      john@example.com
+      jane@test.org
+      admin@site.net
+    end_file: |
+      john
+      jane
+      admin
+
+  - title: "Markdown to Plain Text"
+    description: |
+      Remove the Markdown formatting (# and **) to get plain text.
+      Clean up formatting syntax!
+    start_file: |
+      # Header
+      **bold text**
+      ## Subheader
+    end_file: |
+      Header
+      bold text
+      Subheader
+
+  # === REAL-WORLD SCENARIOS ===
+
+  - title: "Fix Indentation"
+    description: |
+      Fix the inconsistent indentation (use 2 spaces per level).
+      Make the code properly formatted!
+    start_file: |
+      if (true) {
+      console.log("hi");
+         console.log("there");
+      }
+    end_file: |
+      if (true) {
+        console.log("hi");
+        console.log("there");
+      }
+
+  - title: "Add Console Logs"
+    description: |
+      Add console.log() statements after each function call.
+      Good for debugging practice!
+    start_file: |
+      processData();
+      validateInput();
+      saveToDatabase();
+    end_file: |
+      processData();
+      console.log("processData");
+      validateInput();
+      console.log("validateInput");
+      saveToDatabase();
+      console.log("saveToDatabase");
+
+  - title: "Create ENV File"
+    description: |
+      Convert the object properties to ENV file format.
+      Transform syntax completely!
+    start_file: |
+      {
+        apiKey: "abc123",
+        port: 3000,
+        host: "localhost"
+      }
+    end_file: |
+      API_KEY=abc123
+      PORT=3000
+      HOST=localhost
+
+  - title: "CSV to JSON Array"
+    description: |
+      Convert CSV data to a JSON array format.
+      Complex transformation exercise!
+    start_file: |
+      name,age,city
+      John,30,NYC
+      Jane,25,LA
+    end_file: |
+      [
+        {"name":"John","age":"30","city":"NYC"},
+        {"name":"Jane","age":"25","city":"LA"}
+      ]
+
+  - title: "Add Error Handling"
+    description: |
+      Wrap the code in a try-catch block.
+      Add proper error handling structure!
+    start_file: |
+      const data = JSON.parse(input);
+      processData(data);
+      return data;
+    end_file: |
+      try {
+        const data = JSON.parse(input);
+        processData(data);
+        return data;
+      } catch (error) {
+        console.error(error);
+      }
+
+  # === INTERMEDIATE CHALLENGES ===
+
+  - title: "Remove HTML Tags"
+    description: |
+      Remove all HTML tags, keeping only the text content.
+      Pattern matching required!
+    start_file: |
+      <p>Hello <strong>world</strong></p>
+      <div>Test <span>text</span></div>
+    end_file: |
+      Hello world
+      Test text
+
+  - title: "Double Quote Array"
+    description: |
+      Put quotes around each array element and add proper spacing.
+      Array formatting practice!
+    start_file: |
+      [apple, banana, cherry]
+    end_file: |
+      ["apple", "banana", "cherry"]
+
+  - title: "Add Type Annotations"
+    description: |
+      Add type annotations to all the parameters.
+      TypeScript typing practice!
+    start_file: |
+      function greet(name, age) {
+        return `${name} is ${age}`;
+      }
+    end_file: |
+      function greet(name: string, age: number) {
+        return `${name} is ${age}`;
+      }
+
+  - title: "Convert Object to Destructuring"
+    description: |
+      Convert object property access to destructuring.
+      Modern JavaScript refactoring!
+    start_file: |
+      const name = user.name;
+      const age = user.age;
+      const email = user.email;
+    end_file: |
+      const { name, age, email } = user;
+
+  - title: "Reorder Function Parameters"
+    description: |
+      Swap the order of parameters in the function signature and call.
+      Be precise with your edits!
+    start_file: |
+      function greet(name, age) {}
+      greet("John", 30);
+    end_file: |
+      function greet(age, name) {}
+      greet(30, "John");
+
+  - title: "Convert Ternary to If-Else"
+    description: |
+      Convert the ternary operator to a full if-else statement.
+      Expand the syntax!
+    start_file: |
+      const result = x > 0 ? "positive" : "negative";
+    end_file: |
+      let result;
+      if (x > 0) {
+        result = "positive";
+      } else {
+        result = "negative";
+      }
+
+  - title: "Add JSDoc Comments"
+    description: |
+      Add a JSDoc comment block above the function.
+      Documentation practice!
+    start_file: |
+      function add(a, b) {
+        return a + b;
+      }
+    end_file: |
+      /**
+       * Add two numbers
+       * @param {number} a
+       * @param {number} b
+       * @returns {number}
+       */
+      function add(a, b) {
+        return a + b;
+      }
+
+  - title: "Create Test Cases"
+    description: |
+      Convert the examples into test case format.
+      Testing pattern practice!
+    start_file: |
+      add(2, 3) should be 5
+      add(0, 0) should be 0
+      add(-1, 1) should be 0
+    end_file: |
+      test('add(2, 3) should be 5', () => {});
+      test('add(0, 0) should be 0', () => {});
+      test('add(-1, 1) should be 0', () => {});
+
+  - title: "Format JSON"
+    description: |
+      Format the minified JSON with proper indentation.
+      Make it readable!
+    start_file: |
+      {"name":"John","age":30,"city":"NYC"}
+    end_file: |
+      {
+        "name": "John",
+        "age": 30,
+        "city": "NYC"
+      }
+
+  - title: "Fix Bracket Style"
+    description: |
+      Change opening braces from same-line to next-line style.
+      Consistent code style matters!
+    start_file: |
+      if (condition) {
+        doSomething();
+      }
+    end_file: |
+      if (condition)
+      {
+        doSomething();
+      }
+
+  # === BONUS CHALLENGES ===
+
+  - title: "Create Getters and Setters"
+    description: |
+      Create getter and setter methods for each property.
+      Boilerplate code generation!
+    start_file: |
+      name
+      age
+      email
+    end_file: |
+      get name() { return this._name; }
+      set name(value) { this._name = value; }
+      get age() { return this._age; }
+      set age(value) { this._age = value; }
+      get email() { return this._email; }
+      set email(value) { this._email = value; }
+
+  - title: "ROT13 Cipher"
+    description: |
+      Apply ROT13 encoding to the text (shift letters by 13).
+      This is a classic cipher challenge!
+    start_file: |
+      HELLO
+    end_file: |
+      URYYB
+
+  - title: "Add Async/Await"
+    description: |
+      Convert the Promise chain to async/await syntax.
+      Modern JavaScript patterns!
+    start_file: |
+      function getData() {
+        return fetch(url).then(r => r.json()).then(data => data);
+      }
+    end_file: |
+      async function getData() {
+        const r = await fetch(url);
+        const data = await r.json();
+        return data;
+      }

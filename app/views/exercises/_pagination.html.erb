@@ -1,9 +1,9 @@
-<%# Gaming-themed Pagy navigation %>
-<% if pagy.pages > 1 %>
+<%# Gaming-themed custom pagination %>
+<% if @exercises.total_pages > 1 %>
   <nav class="flex items-center justify-center gap-2" aria-label="Pagination">
     <%# Previous page link %>
-    <% if pagy.prev %>
-      <%= link_to pagy.url_for(pagy.prev), class: "btn-secondary", style: "padding: 10px 14px; font-size: 14px;", aria_label: "Previous page" do %>
+    <% if @exercises.prev_page %>
+      <%= link_to exercises_path(page: @exercises.prev_page), class: "btn-secondary", style: "padding: 10px 14px; font-size: 14px;", aria_label: "Previous page" do %>
         <svg style="width: 18px; height: 18px;" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
         </svg>
@@ -17,23 +17,38 @@
     <% end %>
 
     <%# Page number links %>
-    <% pagy.series.each do |item| %>
-      <% if item.is_a?(Integer) %>
-        <% if item == pagy.page %>
-          <span style="padding: 10px 16px; background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%); border: 2px solid var(--neon-blue); border-radius: 8px; color: white; font-weight: 700; font-family: 'JetBrains Mono', monospace; box-shadow: 0 0 15px rgba(0, 217, 255, 0.5); min-width: 44px; text-align: center; display: inline-block;">
-            <%= item %>
-          </span>
-        <% else %>
-          <%= link_to item, pagy.url_for(item), class: "btn-secondary", style: "padding: 10px 16px; font-size: 14px; font-family: 'JetBrains Mono', monospace; min-width: 44px; text-align: center; display: inline-block; text-decoration: none;" %>
-        <% end %>
-      <% elsif item == :gap %>
+    <% page_range = [] %>
+    <% total = @exercises.total_pages %>
+    <% current = @exercises.current_page %>
+
+    <%# Calculate page range to show %>
+    <% if total <= 7 %>
+      <% page_range = (1..total).to_a %>
+    <% else %>
+      <% if current <= 4 %>
+        <% page_range = [1, 2, 3, 4, 5, :gap, total] %>
+      <% elsif current >= total - 3 %>
+        <% page_range = [1, :gap, total - 4, total - 3, total - 2, total - 1, total] %>
+      <% else %>
+        <% page_range = [1, :gap, current - 1, current, current + 1, :gap, total] %>
+      <% end %>
+    <% end %>
+
+    <% page_range.each do |page| %>
+      <% if page == :gap %>
         <span style="padding: 10px 12px; color: var(--text-muted); font-weight: 600;">...</span>
+      <% elsif page == current %>
+        <span style="padding: 10px 16px; background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%); border: 2px solid var(--neon-blue); border-radius: 8px; color: white; font-weight: 700; font-family: 'JetBrains Mono', monospace; box-shadow: 0 0 15px rgba(0, 217, 255, 0.5); min-width: 44px; text-align: center; display: inline-block;">
+          <%= page %>
+        </span>
+      <% else %>
+        <%= link_to page, exercises_path(page: page), class: "btn-secondary", style: "padding: 10px 16px; font-size: 14px; font-family: 'JetBrains Mono', monospace; min-width: 44px; text-align: center; display: inline-block; text-decoration: none;" %>
       <% end %>
     <% end %>
 
     <%# Next page link %>
-    <% if pagy.next %>
-      <%= link_to pagy.url_for(pagy.next), class: "btn-secondary", style: "padding: 10px 14px; font-size: 14px;", aria_label: "Next page" do %>
+    <% if @exercises.next_page %>
+      <%= link_to exercises_path(page: @exercises.next_page), class: "btn-secondary", style: "padding: 10px 14px; font-size: 14px;", aria_label: "Next page" do %>
         <svg style="width: 18px; height: 18px;" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
         </svg>

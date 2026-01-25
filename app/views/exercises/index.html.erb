@@ -4,9 +4,9 @@
       <h1 class="text-5xl font-bold mb-2" style="font-family: 'JetBrains Mono', monospace;">
         <span class="text-gradient">Challenges</span>
       </h1>
-      <% if @pagy.count > 0 %>
+      <% if @exercises.total_count > 0 %>
         <p style="color: var(--text-muted); font-size: 14px;">
-          Displaying <%= @pagy.from %>-<%= @pagy.to %> of <span style="color: var(--neon-blue); font-weight: 600;"><%= @pagy.count %></span> available exercises
+          Displaying <%= @exercises.offset_value + 1 %>-<%= [@exercises.offset_value + @exercises.length, @exercises.total_count].min %> of <span style="color: var(--neon-blue); font-weight: 600;"><%= @exercises.total_count %></span> available exercises
         </p>
       <% end %>
     </div>
@@ -105,7 +105,7 @@
 
     <!-- Pagination -->
     <div class="mt-8">
-      <%= render "shared/pagy_nav", pagy: @pagy %>
+      <%= render "pagination" %>
     </div>
   <% else %>
     <div class="game-card text-center slide-in" style="padding: 60px 40px;">
