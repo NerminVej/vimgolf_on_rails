@@ -1,5 +1,5 @@
 <nav class="glass-card" style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 0; border-top: none; border-left: none; border-right: none; border-bottom: 2px solid var(--border-primary);">
-  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+  <div class="mx-auto px-12 py-6 flex justify-between items-center w-full">
     <!-- Brand -->
     <div class="flex items-center gap-8">
       <%= link_to root_path, class: "flex items-center gap-3 group" do %>
@@ -9,8 +9,8 @@
       <% end %>
 
       <% if user_signed_in? %>
-        <div class="flex items-center gap-4">
-          <%= link_to exercises_path, class: "text-gray-300 hover:text-white font-semibold transition-all hover:text-shadow relative group" do %>
+        <div class="flex items-center gap-6">
+          <%= link_to exercises_path, class: "text-gray-300 hover:text-white font-semibold transition-all hover:text-shadow relative group px-4" do %>
             <span>Exercises</span>
             <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300"></span>
           <% end %>
@@ -22,16 +22,16 @@
     </div>
 
     <!-- Navigation Links -->
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-6">
       <% if user_signed_in? %>
         <!-- Authenticated User -->
-        <div class="flex items-center gap-4 px-4 py-2 rounded-lg" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="flex items-center gap-4 px-6 py-3 rounded-lg" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);">
           <span class="text-sm" style="color: var(--text-muted);">Player:</span>
           <span class="font-semibold" style="color: var(--neon-blue); font-family: 'JetBrains Mono', monospace;">
             <%= current_user.email.split('@').first %>
           </span>
         </div>
-        <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn-danger" %>
+        <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn-danger", style: "margin-left: 8px;" %>
       <% else %>
         <!-- Unauthenticated User -->
         <%= link_to "Sign In", new_user_session_path, class: "btn-secondary" %>

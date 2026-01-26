@@ -108,7 +108,7 @@ main {
 .btn-primary {
   background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
   color: white;
-  padding: 12px 24px;
+  padding: 16px 36px;
   border-radius: 8px;
   border: none;
   font-weight: 600;
@@ -143,7 +143,7 @@ main {
 .btn-secondary {
   background: rgba(255, 255, 255, 0.1);
   color: var(--text-primary);
-  padding: 12px 24px;
+  padding: 16px 36px;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   font-weight: 600;
@@ -162,7 +162,7 @@ main {
 .btn-danger {
   background: linear-gradient(135deg, var(--neon-red) 0%, #dc2626 100%);
   color: white;
-  padding: 12px 24px;
+  padding: 16px 36px;
   border-radius: 8px;
   border: none;
   font-weight: 600;
@@ -180,7 +180,7 @@ main {
 .btn-success {
   background: linear-gradient(135deg, var(--neon-green) 0%, #059669 100%);
   color: white;
-  padding: 12px 24px;
+  padding: 16px 36px;
   border-radius: 8px;
   border: none;
   font-weight: 600;
