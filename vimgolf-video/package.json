@@ -1,0 +1,25 @@
+{
+  "name": "vimgolf-video",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "remotion studio",
+    "build": "remotion render",
+    "upgrade": "remotion upgrade",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.409"
+  },
+  "devDependencies": {
+    "@remotion/cli": "^4.0.409",
+    "@types/react": "^18.3.27",
+    "typescript": "^5.9.3"
+  }
+}

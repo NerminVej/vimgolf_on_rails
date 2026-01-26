@@ -72,6 +72,7 @@ body::before {
 main {
   position: relative;
   z-index: 1;
+  padding-top: 2rem;
 }
 
 /* Glassmorphism Card */

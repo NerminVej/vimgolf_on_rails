@@ -1,0 +1,239 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    VIMGOLF PROMOTIONAL VIDEO STORYBOARD                     ║
+║                              45 seconds • 30 FPS                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ SCENE 1: INTRO (0:00 - 0:05)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Frame 0-150 | 0:00-0:05]
+
+┌──────────────────────────────────────┐
+│                                      │
+│     ✨ NEON GLOW BACKGROUND ✨      │
+│                                      │
+│         ╔═══════════════╗            │
+│         ║   VimGolf    ║            │
+│         ║ [Gradient]   ║            │
+│         ╚═══════════════╝            │
+│                                      │
+│    Master Vim. One Challenge         │
+│         at a Time.                   │
+│                                      │
+└──────────────────────────────────────┘
+
+Animation:
+• Logo scales in with spring physics (0:00-0:15)
+• Title fades in with opacity animation
+• Tagline slides up from bottom (0:01-0:02)
+• Scene fades out (0:04-0:05)
+
+Colors:
+• Gradient: #00d9ff → #a855f7
+• Neon glow with blur effect
+• Deep dark background (#0a0e27)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ SCENE 2: EDITOR SHOWCASE (0:05 - 0:15)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Frame 150-450 | 0:05-0:15]
+
+┌─────────────────────────────────────────────────────────────┐
+│              Real Vim. Real Practice.                       │
+│                                                             │
+│  ┌─────────────────────┐    ┌──────────────────────┐      │
+│  │ ●●● vim editor      │    │ Target Output        │      │
+│  ├─────────────────────┤    ├──────────────────────┤      │
+│  │                     │    │                      │      │
+│  │ Hello World         │    │ Hello, Vim World!    │      │
+│  │ █                   │    │                      │      │
+│  │                     │    │                      │      │
+│  ├─────────────────────┤    └──────────────────────┘      │
+│  │ NORMAL   Keys: 24   │                                   │
+│  └─────────────────────┘                                   │
+│                                                             │
+│              ┌───────────────┐                             │
+│              │ Keystrokes    │                             │
+│              │      24       │                             │
+│              └───────────────┘                             │
+└─────────────────────────────────────────────────────────────┘
+
+Animation:
+• Editor slides in from left (0:05-0:06.3)
+• Typing animation simulates real editing (0:07-0:12)
+• Keystroke counter increments in real-time
+• Success glow effect on completion (0:11.6-0:12.3)
+• Fade out (0:14-0:15)
+
+Features Shown:
+• Split-screen comparison
+• Real-time keystroke tracking
+• Vim status bar (mode, position)
+• Terminal aesthetics with traffic lights
+• Live cursor blinking
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ SCENE 3: FEATURES (0:15 - 0:28)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Frame 450-840 | 0:15-0:28]
+
+┌─────────────────────────────────────────────────────┐
+│    Features That Level Up Your Skills [Gradient]   │
+│                                                     │
+│  ┌──────────────┐       ┌──────────────┐          │
+│  │     🎮       │       │     🏆       │          │
+│  │ Practice Mode│       │   Compete    │          │
+│  │ Random       │       │ Minimize     │          │
+│  │ challenges   │       │ keystrokes   │          │
+│  └──────────────┘       └──────────────┘          │
+│                                                     │
+│  ┌──────────────┐       ┌──────────────┐          │
+│  │     ✨       │       │     📊       │          │
+│  │    Create    │       │ Track Progress│         │
+│  │ Design       │       │ Detailed     │          │
+│  │ challenges   │       │ statistics   │          │
+│  └──────────────┘       └──────────────┘          │
+└─────────────────────────────────────────────────────┘
+
+Animation:
+• Title slides down with fade (0:15-0:16)
+• Feature cards pop in with spring (staggered):
+  - Practice Mode (0:16)
+  - Compete (0:16.6)
+  - Create (0:17.3)
+  - Track Progress (0:18)
+• Cards have glassmorphism effect
+• Scene fades out (0:27-0:28)
+
+Card Style:
+• Semi-transparent background
+• Neon border glow (#00d9ff)
+• Large emoji icons
+• Bold titles with gradient
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ SCENE 4: STATISTICS (0:28 - 0:38)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Frame 840-1140 | 0:28-0:38]
+
+┌──────────────────────────────────────────────────┐
+│                    🏆                            │
+│            MISSION COMPLETE                      │
+│           Session Statistics                     │
+│                                                  │
+│  ┌────────┐  ┌────────┐  ┌────────┐  ┌────────┐│
+│  │   ✅   │  │   ⌨️   │  │   ⏱️   │  │  🎖️  ││
+│  │   12   │  │  342   │  │   18   │  │  92%   ││
+│  │Completed│  │Total   │  │Duration│  │Success ││
+│  │        │  │Keys    │  │        │  │Rate    ││
+│  └────────┘  └────────┘  └────────┘  └────────┘│
+│                                                  │
+│  Every keystroke counts. Every challenge         │
+│           makes you better.                      │
+└──────────────────────────────────────────────────┘
+
+Animation:
+• Trophy bounces in (0:28-0:28.5)
+• Title and header fade in (0:28-0:28.6)
+• Stats boxes scale in (staggered):
+  - Completed (0:29.3)
+  - Total Keys (0:29.6)
+  - Duration (0:30)
+  - Success Rate (0:30.3)
+• Numbers count up from 0 (animated)
+• Bottom message fades in (0:31.3-0:32.3)
+• Scene fades out (0:37-0:38)
+
+Stats Colors:
+• Green (#10b981) - Completed
+• Blue (#00d9ff) - Total Keys
+• Yellow (#fbbf24) - Duration
+• Purple (#a855f7) - Success Rate
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ SCENE 5: CALL TO ACTION (0:38 - 0:45)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Frame 1140-1350 | 0:38-0:45]
+
+┌──────────────────────────────────────┐
+│                                      │
+│        ✨ Radial Glow Effect ✨     │
+│                                      │
+│         ╔═══════════════╗            │
+│         ║   VimGolf    ║            │
+│         ║ [3-Color     ║            │
+│         ║  Gradient]   ║            │
+│         ╚═══════════════╝            │
+│                                      │
+│      ┌─────────────────────┐        │
+│      │ START YOUR JOURNEY  │        │
+│      │    [Pulsing CTA]    │        │
+│      └─────────────────────┘        │
+│                                      │
+│   Join thousands of developers       │
+│       mastering Vim                  │
+│   One keystroke at a time.           │
+│                                      │
+│         vimgolf.com                  │
+│                                      │
+└──────────────────────────────────────┘
+
+Animation:
+• Logo scales in with spring (0:38-0:38.5)
+• CTA button slides up (0:39-0:40)
+• Button pulses continuously (after 0:40)
+• Tagline fades in (0:40-0:41.6)
+• Website URL appears (0:40-0:41.6)
+• Background radial glow pulses
+
+Colors:
+• 3-color gradient: #00d9ff → #a855f7 → #ec4899
+• CTA button: Bright blue (#00d9ff) with glow
+• Emphasis text: Yellow-Pink gradient
+
+Button Effect:
+• Subtle scale pulse (1.0 → 1.05)
+• Strong glow effect (60px blur)
+• High contrast on dark background
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║                            TECHNICAL DETAILS                                ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+Duration:      45 seconds (1,350 frames)
+Frame Rate:    30 FPS
+Resolution:    1920x1080 (Full HD)
+Aspect Ratio:  16:9
+Format:        MP4 (H.264)
+Quality:       CRF 18 (high quality)
+
+Key Techniques:
+• Spring physics for natural motion
+• Easing functions for smooth transitions
+• Interpolation for animations
+• Staggered timing for visual interest
+• Glassmorphism and backdrop blur
+• Gradient text and neon glows
+• Counter animations (counting numbers)
+• Opacity and transform animations
+
+Color Palette:
+• Background:  #0a0e27 (Deep Dark Blue)
+• Neon Blue:   #00d9ff (Primary)
+• Neon Purple: #a855f7 (Secondary)
+• Neon Pink:   #ec4899 (Accent)
+• Neon Green:  #10b981 (Success)
+• Neon Yellow: #fbbf24 (Warning)
+
+Fonts:
+• Primary: Inter (titles, body)
+• Mono:    JetBrains Mono (code)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
