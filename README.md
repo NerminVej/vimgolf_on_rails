@@ -90,6 +90,10 @@ This project was built as a learning exercise to create a VimGolf-style practice
 rails test
 ```
 
+## Video
+
+https://github.com/user-attachments/assets/17b62bc6-f256-4995-bb18-cc3a08854b64
+
 ## License
 
 This project is open source and available under the MIT License.
