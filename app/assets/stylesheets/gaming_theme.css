@@ -470,24 +470,77 @@ main {
   background: linear-gradient(180deg, var(--neon-purple) 0%, var(--neon-blue) 100%);
 }
 
-/* Flash Messages */
+/* Flash Messages - Toast Style */
+.flash-container {
+  position: fixed;
+  top: 88px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  pointer-events: none;
+}
+
 .flash-message {
-  background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
   border: 1px solid var(--neon-blue);
-  border-radius: 8px;
-  padding: 16px;
-  backdrop-filter: blur(10px);
-  animation: slide-in 0.5s ease-out;
+  border-radius: 12px;
+  padding: 16px 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+              0 0 20px rgba(0, 217, 255, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  animation: toast-slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+  min-width: 300px;
 }
 
 .flash-message.success {
   border-color: var(--neon-green);
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.15) 100%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+              0 0 20px rgba(16, 185, 129, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .flash-message.error {
   border-color: var(--neon-red);
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.15) 100%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+              0 0 20px rgba(239, 68, 68, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.flash-text {
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+@keyframes toast-slide-in {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .flash-container {
+    right: 16px;
+    left: 16px;
+    max-width: none;
+  }
+
+  .flash-message {
+    min-width: unset;
+  }
 }
 
 /* Table Styles */

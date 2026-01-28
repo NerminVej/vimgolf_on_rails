@@ -31,10 +31,10 @@
     <%= render "shared/navbar" %>
 
     <% if flash.any? %>
-      <div class="container mx-auto mt-24 px-6" style="max-width: 1400px;">
+      <div class="flash-container">
         <% flash.each do |type, message| %>
           <div class="flash-message <%= type == 'notice' ? 'success' : 'error' %>" role="alert">
-            <span class="block sm:inline" style="color: var(--text-primary);"><%= message %></span>
+            <span class="flash-text"><%= message %></span>
           </div>
         <% end %>
       </div>
