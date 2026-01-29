@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :practice_sessions, only: [:create, :show] do
     member do
       post :quit
+      post :skip
       get :next
       get :stats
     end

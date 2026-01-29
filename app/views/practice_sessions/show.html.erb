@@ -28,9 +28,14 @@
           <div class="stat-label">Time Elapsed</div>
         </div>
       </div>
-      <%= button_to quit_practice_session_path(@session), method: :post, class: "btn-danger", data: { turbo_confirm: "Quit this practice session?" } do %>
-        <span style="margin-right: 8px;">✕</span>Quit Session
-      <% end %>
+      <div class="flex gap-2">
+        <%= button_to skip_practice_session_path(@session), method: :post, class: "btn-secondary" do %>
+          <span style="margin-right: 8px;">⏭</span>Skip Exercise
+        <% end %>
+        <%= button_to quit_practice_session_path(@session), method: :post, class: "btn-danger", data: { turbo_confirm: "Quit this practice session?" } do %>
+          <span style="margin-right: 8px;">✕</span>Quit Session
+        <% end %>
+      </div>
     </div>
   </div>
 

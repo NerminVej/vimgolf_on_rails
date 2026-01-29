@@ -1,6 +1,6 @@
 class PracticeSessionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_session, only: [:show, :quit, :next, :stats]
+  before_action :set_session, only: [:show, :quit, :skip, :next, :stats]
 
   def create
     # End any existing active sessions for this user
@@ -68,6 +68,18 @@ class PracticeSessionsController < ApplicationController
     )
 
     redirect_to stats_practice_session_path(@session)
+  end
+
+  def skip
+    # Find current incomplete attempt and mark as skipped
+    current_attempt = @session.practice_attempts.where(completed_at: nil, skipped: false).last
+
+    if current_attempt
+      current_attempt.update(skipped: true)
+      flash[:notice] = "Exercise skipped!"
+    end
+
+    redirect_to next_practice_session_path(@session)
   end
 
   def next
