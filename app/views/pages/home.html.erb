@@ -14,7 +14,7 @@
   </div>
 
   <!-- Action Cards -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 slide-in" style="animation-delay: 0.1s;">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 slide-in" style="animation-delay: 0.1s;">
     <!-- Practice Mode Card -->
     <%= button_to practice_sessions_path, method: :post, class: "game-card text-left hover:scale-105 transition-transform", style: "cursor: pointer; border: none; width: 100%; display: block;" do %>
       <div class="flex items-start gap-4">
@@ -26,6 +26,22 @@
           </p>
           <div class="mt-4 inline-block px-8 py-4 rounded-lg" style="background: linear-gradient(135deg, var(--neon-purple) 0%, var(--neon-pink) 100%); color: white; font-weight: 600; font-size: 14px;">
             Start Session →
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- Star Hunt Training Card -->
+    <%= button_to star_hunt_sessions_path, method: :post, class: "game-card text-left hover:scale-105 transition-transform", style: "cursor: pointer; border: none; width: 100%; display: block;" do %>
+      <div class="flex items-start gap-4">
+        <div style="font-size: 48px; filter: drop-shadow(0 0 10px var(--neon-yellow));">⭐</div>
+        <div>
+          <h3 class="text-2xl font-bold mb-2 text-gradient">Star Hunt Training</h3>
+          <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+            Practice navigation and precision. Find and delete the star in each stage as efficiently as possible.
+          </p>
+          <div class="mt-4 inline-block px-8 py-4 rounded-lg" style="background: linear-gradient(135deg, var(--neon-yellow) 0%, var(--neon-pink) 100%); color: white; font-weight: 600; font-size: 14px;">
+            Start Training →
           </div>
         </div>
       </div>

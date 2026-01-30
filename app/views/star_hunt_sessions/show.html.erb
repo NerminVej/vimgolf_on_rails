@@ -1,0 +1,83 @@
+<div class="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white p-6">
+  <!-- Header -->
+  <div class="max-w-7xl mx-auto mb-6">
+    <div class="flex items-center justify-between bg-gray-800/50 backdrop-blur-sm rounded-lg p-4 border border-cyan-500/30">
+      <div>
+        <h1 class="text-2xl font-bold text-cyan-400">Star Hunt Training Mode</h1>
+        <p class="text-gray-400 text-sm mt-1">Find and delete the star (*) as efficiently as possible</p>
+      </div>
+      <div class="flex gap-6 text-center">
+        <div>
+          <div class="text-2xl font-bold text-cyan-400" data-star-hunt-target="completedStages">0</div>
+          <div class="text-xs text-gray-400 uppercase">Stages Cleared</div>
+        </div>
+        <div>
+          <div class="text-2xl font-bold text-purple-400" data-star-hunt-target="totalKeystrokes">0</div>
+          <div class="text-xs text-gray-400 uppercase">Total Keys</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Game Area -->
+  <div class="max-w-7xl mx-auto" data-controller="star-hunt"
+       data-star-hunt-session-id-value="<%= @session.id %>"
+       data-star-hunt-start-file-value="<%= @stage_data[:start_file] %>"
+       data-star-hunt-end-file-value="<%= @stage_data[:end_file] %>"
+       data-star-hunt-current-stage-value="<%= @session.current_stage %>"
+       data-star-hunt-completed-stages-value="<%= @session.completed_stages %>"
+       data-star-hunt-total-keystrokes-value="<%= @session.total_keystrokes %>">
+
+    <!-- Grid Layout: Editor and Target Side by Side -->
+    <div class="grid grid-cols-2 gap-6 mb-6">
+      <!-- Left: Vim Editor -->
+      <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg border border-cyan-500/30 overflow-hidden">
+        <div class="bg-gradient-to-r from-cyan-600 to-purple-600 p-3">
+          <h2 class="text-lg font-semibold text-white">Your Editor</h2>
+          <p class="text-sm text-gray-200">Find and delete the star!</p>
+        </div>
+        <div class="p-4">
+          <div data-star-hunt-target="editor" class="border border-gray-600 rounded overflow-hidden"></div>
+          <div class="mt-3 flex items-center justify-between text-sm">
+            <div class="text-gray-400">
+              Keystrokes: <span class="text-cyan-400 font-mono font-bold" data-star-hunt-target="keystrokes">0</span>
+            </div>
+            <div class="text-gray-400">
+              Mode: <span class="text-purple-400 font-semibold" data-star-hunt-target="mode">NORMAL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Target Output -->
+      <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg border border-purple-500/30 overflow-hidden">
+        <div class="bg-gradient-to-r from-purple-600 to-pink-600 p-3">
+          <h2 class="text-lg font-semibold text-white">Expected Output</h2>
+          <p class="text-sm text-gray-200">Remove the star to match this</p>
+        </div>
+        <div class="p-4" data-controller="copy-protection">
+          <div class="bg-black/50 border border-gray-600 rounded p-4 font-mono text-sm overflow-auto" style="max-height: 600px;">
+            <pre class="text-gray-300 whitespace-pre"><%= @stage_data[:end_file] %></pre>
+          </div>
+          <div class="mt-3 text-xs text-gray-500 italic">
+            * Target output is copy-protected for fair practice
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info and Actions -->
+    <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-4 border border-cyan-500/30">
+      <div class="flex items-center justify-between">
+        <div class="text-sm text-gray-400">
+          <span class="text-cyan-400 font-semibold">Stage <%= @session.current_stage %></span> -
+          Use Vim commands to navigate and delete the star efficiently
+        </div>
+        <%= button_to "Quit Session", quit_star_hunt_session_path(@session),
+            method: :post,
+            class: "px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition font-semibold text-sm",
+            data: { confirm: "Are you sure you want to quit?" } %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_01_19_172052) do
+ActiveRecord::Schema[8.0].define(version: 2026_01_30_211207) do
   create_table "exercises", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
@@ -57,6 +57,17 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_19_172052) do
     t.index ["user_id"], name: "index_practice_sessions_on_user_id"
   end
 
+  create_table "star_hunt_sessions", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "current_stage", default: 1, null: false
+    t.integer "completed_stages", default: 0, null: false
+    t.integer "total_keystrokes", default: 0, null: false
+    t.datetime "ended_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_star_hunt_sessions_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -73,4 +84,5 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_19_172052) do
   add_foreign_key "practice_attempts", "exercises"
   add_foreign_key "practice_attempts", "practice_sessions"
   add_foreign_key "practice_sessions", "users"
+  add_foreign_key "star_hunt_sessions", "users"
 end

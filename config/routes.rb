@@ -23,6 +23,14 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :star_hunt_sessions, only: [:create, :show] do
+    member do
+      post :complete
+      post :quit
+      get :stats
+    end
+  end
+
   get "up" => "rails/health#show", as: :rails_health_check
 
   root "pages#home"
