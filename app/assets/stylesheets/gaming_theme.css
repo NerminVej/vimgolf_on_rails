@@ -411,6 +411,11 @@ main {
   line-height: 1.6;
   color: #d4d4d4;
   overflow-x: auto;
+  /* Prevent text selection and copying */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 /* HUD Overlay */
