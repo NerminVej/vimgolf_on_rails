@@ -1,9 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
-import { EditorView, basicSetup } from "codemirror"
-import { Vim, vim } from "@replit/codemirror-vim"
+import { EditorView } from "@codemirror/view"
+import { EditorState } from "@codemirror/state"
+import { vim } from "@replit/codemirror-vim"
 
 export default class extends Controller {
-  static targets = ["editor", "keystrokes", "mode", "completedStages", "totalKeystrokes"]
+  static targets = ["editor", "keystrokes", "completedStages", "totalKeystrokes"]
   static values = {
     sessionId: String,
     startFile: String,
@@ -20,55 +21,41 @@ export default class extends Controller {
   }
 
   disconnect() {
-    if (this.view) {
-      this.view.destroy()
+    if (this.editorView) {
+      this.editorView.destroy()
     }
   }
 
   initializeEditor() {
     // Create CodeMirror editor with Vim mode
-    this.view = new EditorView({
+    const vimExtension = vim()
+
+    const updateListener = EditorView.updateListener.of((update) => {
+      if (update.docChanged) {
+        this.keystrokeCount++
+        this.keystrokesTarget.textContent = this.keystrokeCount
+        this.checkCompletion()
+      }
+    })
+
+    const extensions = [vimExtension, updateListener]
+
+    const startState = EditorState.create({
       doc: this.startFileValue,
-      extensions: [
-        basicSetup,
-        vim(),
-        EditorView.updateListener.of((update) => {
-          if (update.docChanged) {
-            this.checkCompletion()
-          }
-        })
-      ],
+      extensions: extensions
+    })
+
+    this.editorView = new EditorView({
+      state: startState,
       parent: this.editorTarget
     })
 
-    // Track keystrokes
-    this.view.dom.addEventListener('keydown', (e) => {
-      // Don't count modifier keys alone
-      if (!['Shift', 'Control', 'Alt', 'Meta'].includes(e.key)) {
-        this.keystrokeCount++
-        this.keystrokesTarget.textContent = this.keystrokeCount
-      }
-    })
-
-    // Track Vim mode changes
-    Vim.defineOption('mode', undefined, 'normal')
-    const updateMode = () => {
-      const vimState = this.view.state.field(vim)
-      if (vimState) {
-        const mode = vimState.vim?.mode || 'normal'
-        this.modeTarget.textContent = mode.toUpperCase()
-      }
-    }
-
-    // Update mode on state changes
-    setInterval(updateMode, 100)
-
     // Focus the editor
-    this.view.focus()
+    this.editorView.focus()
   }
 
   checkCompletion() {
-    const currentContent = this.view.state.doc.toString()
+    const currentContent = this.editorView.state.doc.toString()
     const expectedContent = this.endFileValue.trim()
 
     if (currentContent.trim() === expectedContent) {
@@ -90,7 +77,7 @@ export default class extends Controller {
         },
         body: JSON.stringify({
           keystrokes: this.keystrokeCount,
-          content: this.view.state.doc.toString()
+          content: this.editorView.state.doc.toString()
         })
       })
 
