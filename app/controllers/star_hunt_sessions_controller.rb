@@ -46,7 +46,7 @@ class StarHuntSessionsController < ApplicationController
 
   def quit
     @session.update(ended_at: Time.current)
-    redirect_to star_hunt_session_stats_path(@session)
+    redirect_to stats_star_hunt_session_path(@session)
   end
 
   def stats
