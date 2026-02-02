@@ -94,7 +94,7 @@ export default class extends Controller {
 
         // Load next stage after a short delay
         setTimeout(() => {
-          window.location.reload()
+          window.location.href = `/star_hunt_sessions/${this.sessionIdValue}`
         }, 1500)
       } else {
         this.showToast(data.message, 'error')
