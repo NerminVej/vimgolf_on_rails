@@ -1,4 +1,10 @@
-<div class="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white p-6">
+<div class="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white p-6" data-controller="star-hunt"
+     data-star-hunt-session-id-value="<%= @session.id %>"
+     data-star-hunt-start-file-value="<%= @stage_data[:start_file] %>"
+     data-star-hunt-end-file-value="<%= @stage_data[:end_file] %>"
+     data-star-hunt-current-stage-value="<%= @session.current_stage %>"
+     data-star-hunt-completed-stages-value="<%= @session.completed_stages %>"
+     data-star-hunt-total-keystrokes-value="<%= @session.total_keystrokes %>">
   <!-- Header -->
   <div class="max-w-7xl mx-auto mb-6">
     <div class="flex items-center justify-between bg-gray-800/50 backdrop-blur-sm rounded-lg p-4 border border-cyan-500/30">
@@ -8,11 +14,11 @@
       </div>
       <div class="flex gap-6 text-center">
         <div>
-          <div class="text-2xl font-bold text-cyan-400" data-star-hunt-target="completedStages">0</div>
+          <div class="text-2xl font-bold text-cyan-400" data-star-hunt-target="completedStages"><%= @session.completed_stages %></div>
           <div class="text-xs text-gray-400 uppercase">Stages Cleared</div>
         </div>
         <div>
-          <div class="text-2xl font-bold text-purple-400" data-star-hunt-target="totalKeystrokes">0</div>
+          <div class="text-2xl font-bold text-purple-400" data-star-hunt-target="totalKeystrokes"><%= @session.total_keystrokes %></div>
           <div class="text-xs text-gray-400 uppercase">Total Keys</div>
         </div>
       </div>
@@ -20,13 +26,7 @@
   </div>
 
   <!-- Main Game Area -->
-  <div class="max-w-7xl mx-auto" data-controller="star-hunt"
-       data-star-hunt-session-id-value="<%= @session.id %>"
-       data-star-hunt-start-file-value="<%= @stage_data[:start_file] %>"
-       data-star-hunt-end-file-value="<%= @stage_data[:end_file] %>"
-       data-star-hunt-current-stage-value="<%= @session.current_stage %>"
-       data-star-hunt-completed-stages-value="<%= @session.completed_stages %>"
-       data-star-hunt-total-keystrokes-value="<%= @session.total_keystrokes %>">
+  <div class="max-w-7xl mx-auto">
 
     <!-- Grid Layout: Editor and Target Side by Side -->
     <div class="grid grid-cols-2 gap-6 mb-6">
