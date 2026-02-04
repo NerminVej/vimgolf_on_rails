@@ -2,7 +2,6 @@
 
 A web-based Vim practice application where users can solve editing challenges and improve their Vim skills through interactive exercises and practice sessions.
 
-
 ## Technologies
 
 - **Ruby on Rails** 8.0.3
