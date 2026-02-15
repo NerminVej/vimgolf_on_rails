@@ -4,7 +4,7 @@ A web-based Vim practice application where users can solve editing challenges an
 
  
  
-   
+     
 ## Technologies
 
 - **Ruby on Rails** 8.0.3
