@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :star_hunt_sessions, only: [:create, :show] do
+  resources :star_hunt_sessions, only: [:create, :show, :destroy] do
     member do
       post :complete
       post :quit

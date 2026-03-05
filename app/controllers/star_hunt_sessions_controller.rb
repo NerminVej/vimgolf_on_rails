@@ -1,6 +1,6 @@
 class StarHuntSessionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_session, only: [:show, :complete, :quit, :stats]
+  before_action :set_session, only: [:show, :complete, :quit, :stats, :destroy]
 
   def create
     # End any existing active sessions
@@ -51,6 +51,11 @@ class StarHuntSessionsController < ApplicationController
 
   def stats
     @session.update(ended_at: Time.current) if @session.ended_at.nil?
+  end
+
+  def destroy
+    @session.destroy
+    redirect_to root_path, notice: "Star Hunt session was successfully deleted."
   end
 
   private

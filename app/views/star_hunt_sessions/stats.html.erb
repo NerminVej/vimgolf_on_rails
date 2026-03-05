@@ -73,6 +73,10 @@
 
       <%= link_to "Back to Home", root_path,
           class: "px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-semibold transition" %>
+
+      <%= button_to "Delete Session", star_hunt_session_path(@session), method: :delete,
+          data: { turbo_confirm: "Delete this training session? This cannot be undone." },
+          class: "px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition" %>
     </div>
   </div>
 </div>
