@@ -673,6 +673,40 @@ main {
   box-shadow: 0 8px 30px rgba(168, 85, 247, 0.7) !important;
 }
 
+/* Stats Button Hover Effects */
+.stats-button {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.stats-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+}
+
+.stats-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.stats-button:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 10px 35px rgba(0, 217, 255, 0.8) !important;
+}
+
+.stats-button:active {
+  transform: translateY(-2px) scale(1.02);
+}
+
 /* Utility Classes */
 .text-gradient {
   background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);

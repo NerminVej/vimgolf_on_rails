@@ -1,82 +1,134 @@
-<div class="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white p-6">
-  <div class="max-w-4xl mx-auto">
+<div class="min-h-screen text-white p-6" style="background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%); position: relative; overflow: hidden;">
+  <!-- Animated Background -->
+  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 50%); pointer-events: none;"></div>
+
+  <div class="max-w-5xl mx-auto" style="position: relative; z-index: 1;">
     <!-- Header -->
-    <div class="text-center mb-8">
-      <h1 class="text-4xl font-bold mb-2">
-        <% if @session.completed_stages > 0 %>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">
-            Training Complete! 🎯
-          </span>
-        <% else %>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-500">
-            Session Ended
-          </span>
-        <% end %>
-      </h1>
-      <p class="text-gray-400">Star Hunt Training Session Results</p>
+    <div class="text-center mb-12 slide-in">
+      <% if @session.completed_stages > 0 %>
+        <div style="font-size: 80px; margin-bottom: 16px; filter: drop-shadow(0 0 20px var(--neon-yellow)); animation: pulse-glow 2s ease-in-out infinite;">🎯</div>
+        <h1 class="text-6xl font-bold mb-3" style="font-family: 'JetBrains Mono', monospace;">
+          <span class="text-gradient">Training Complete!</span>
+        </h1>
+        <p style="color: var(--text-secondary); font-size: 18px;">Excellent work! Here's your performance breakdown</p>
+      <% else %>
+        <div style="font-size: 80px; margin-bottom: 16px; opacity: 0.5;">⏸️</div>
+        <h1 class="text-5xl font-bold mb-3" style="font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">
+          Session Ended
+        </h1>
+        <p style="color: var(--text-muted); font-size: 16px;">Better luck next time!</p>
+      <% end %>
     </div>
 
     <!-- Stats Grid -->
-    <div class="grid grid-cols-2 gap-4 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 slide-in" style="animation-delay: 0.1s;">
       <!-- Stages Cleared -->
-      <div class="bg-gradient-to-br from-cyan-600/20 to-cyan-800/20 backdrop-blur-sm rounded-lg p-6 border border-cyan-500/30">
-        <div class="text-cyan-400 text-sm uppercase tracking-wide mb-2">Stages Cleared</div>
-        <div class="text-4xl font-bold text-white"><%= @session.completed_stages %></div>
+      <div class="game-card" style="background: linear-gradient(135deg, rgba(0, 217, 255, 0.15) 0%, rgba(0, 217, 255, 0.05) 100%); border-color: var(--neon-blue); transition: all 0.3s ease;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="font-size: 56px; filter: drop-shadow(0 0 10px var(--neon-blue));">⭐</div>
+          <div style="flex: 1;">
+            <div style="color: var(--neon-blue); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; margin-bottom: 8px;">Stages Cleared</div>
+            <div style="font-size: 48px; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: white; line-height: 1;"><%= @session.completed_stages %></div>
+          </div>
+        </div>
       </div>
 
       <!-- Total Keystrokes -->
-      <div class="bg-gradient-to-br from-purple-600/20 to-purple-800/20 backdrop-blur-sm rounded-lg p-6 border border-purple-500/30">
-        <div class="text-purple-400 text-sm uppercase tracking-wide mb-2">Total Keystrokes</div>
-        <div class="text-4xl font-bold text-white"><%= @session.total_keystrokes %></div>
+      <div class="game-card" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(168, 85, 247, 0.05) 100%); border-color: var(--neon-purple); transition: all 0.3s ease;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="font-size: 56px; filter: drop-shadow(0 0 10px var(--neon-purple));">⌨️</div>
+          <div style="flex: 1;">
+            <div style="color: var(--neon-purple); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; margin-bottom: 8px;">Total Keystrokes</div>
+            <div style="font-size: 48px; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: white; line-height: 1;"><%= @session.total_keystrokes %></div>
+          </div>
+        </div>
       </div>
 
       <!-- Average Keystrokes per Stage -->
-      <div class="bg-gradient-to-br from-pink-600/20 to-pink-800/20 backdrop-blur-sm rounded-lg p-6 border border-pink-500/30">
-        <div class="text-pink-400 text-sm uppercase tracking-wide mb-2">Avg Keys per Stage</div>
-        <div class="text-4xl font-bold text-white">
-          <%= @session.completed_stages > 0 ? (@session.total_keystrokes.to_f / @session.completed_stages).round(1) : 0 %>
+      <div class="game-card" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.15) 0%, rgba(236, 72, 153, 0.05) 100%); border-color: var(--neon-pink); transition: all 0.3s ease;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="font-size: 56px; filter: drop-shadow(0 0 10px var(--neon-pink));">📊</div>
+          <div style="flex: 1;">
+            <div style="color: var(--neon-pink); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; margin-bottom: 8px;">Avg Keys / Stage</div>
+            <div style="font-size: 48px; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: white; line-height: 1;">
+              <%= @session.completed_stages > 0 ? (@session.total_keystrokes.to_f / @session.completed_stages).round(1) : 0 %>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Session Duration -->
-      <div class="bg-gradient-to-br from-yellow-600/20 to-yellow-800/20 backdrop-blur-sm rounded-lg p-6 border border-yellow-500/30">
-        <div class="text-yellow-400 text-sm uppercase tracking-wide mb-2">Session Duration</div>
-        <div class="text-4xl font-bold text-white">
-          <% if @session.ended_at && @session.created_at %>
-            <% duration = (@session.ended_at - @session.created_at).to_i %>
-            <%= duration / 60 %>m <%= duration % 60 %>s
-          <% else %>
-            0m 0s
-          <% end %>
+      <div class="game-card" style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.05) 100%); border-color: var(--neon-yellow); transition: all 0.3s ease;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="font-size: 56px; filter: drop-shadow(0 0 10px var(--neon-yellow));">⏱️</div>
+          <div style="flex: 1;">
+            <div style="color: var(--neon-yellow); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; margin-bottom: 8px;">Session Duration</div>
+            <div style="font-size: 48px; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: white; line-height: 1;">
+              <% if @session.ended_at && @session.created_at %>
+                <% duration = (@session.ended_at - @session.created_at).to_i %>
+                <%= duration / 60 %>m <%= duration % 60 %>s
+              <% else %>
+                0m 0s
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Performance Tips -->
     <% if @session.completed_stages > 0 %>
-      <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-cyan-500/30 mb-6">
-        <h3 class="text-lg font-semibold text-cyan-400 mb-3">💡 Tips for Better Performance</h3>
-        <ul class="space-y-2 text-gray-300 text-sm">
-          <li>• Use <code class="bg-gray-700 px-2 py-1 rounded text-cyan-400">f*</code> to jump directly to the star on the current line</li>
-          <li>• Use <code class="bg-gray-700 px-2 py-1 rounded text-cyan-400">/{pattern}</code> to search for the star across all lines</li>
-          <li>• Press <code class="bg-gray-700 px-2 py-1 rounded text-cyan-400">x</code> or <code class="bg-gray-700 px-2 py-1 rounded text-cyan-400">dl</code> to delete the character under the cursor</li>
-          <li>• Combine movements: <code class="bg-gray-700 px-2 py-1 rounded text-cyan-400">gg</code> (top), <code class="bg-gray-700 px-2 py-1 rounded text-cyan-400">G</code> (bottom), <code class="bg-gray-700 px-2 py-1 rounded text-cyan-400">{line}G</code> (specific line)</li>
-          <li>• Optimal solution is usually 3-5 keystrokes: search, navigate, delete</li>
-        </ul>
+      <div class="game-card slide-in mb-10" style="animation-delay: 0.2s; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%); border-color: var(--neon-green);">
+        <div style="display: flex; align-items: start; gap: 24px;">
+          <div style="font-size: 64px; filter: drop-shadow(0 0 15px var(--neon-green));">💡</div>
+          <div style="flex: 1;">
+            <h3 style="font-size: 24px; font-weight: 700; color: var(--neon-green); margin-bottom: 16px; font-family: 'JetBrains Mono', monospace;">Pro Tips for Better Performance</h3>
+            <div style="display: grid; gap: 12px;">
+              <div style="background: rgba(16, 185, 129, 0.1); padding: 12px 16px; border-radius: 8px; border-left: 3px solid var(--neon-green);">
+                <span style="color: var(--text-secondary); font-size: 15px;">Use <code style="background: rgba(0, 0, 0, 0.4); padding: 4px 8px; border-radius: 4px; color: var(--neon-blue); font-family: 'JetBrains Mono', monospace; font-size: 14px;">f*</code> to jump directly to the star on the current line</span>
+              </div>
+              <div style="background: rgba(16, 185, 129, 0.1); padding: 12px 16px; border-radius: 8px; border-left: 3px solid var(--neon-green);">
+                <span style="color: var(--text-secondary); font-size: 15px;">Use <code style="background: rgba(0, 0, 0, 0.4); padding: 4px 8px; border-radius: 4px; color: var(--neon-blue); font-family: 'JetBrains Mono', monospace; font-size: 14px;">/{pattern}</code> to search for the star across all lines</span>
+              </div>
+              <div style="background: rgba(16, 185, 129, 0.1); padding: 12px 16px; border-radius: 8px; border-left: 3px solid var(--neon-green);">
+                <span style="color: var(--text-secondary); font-size: 15px;">Press <code style="background: rgba(0, 0, 0, 0.4); padding: 4px 8px; border-radius: 4px; color: var(--neon-blue); font-family: 'JetBrains Mono', monospace; font-size: 14px;">x</code> or <code style="background: rgba(0, 0, 0, 0.4); padding: 4px 8px; border-radius: 4px; color: var(--neon-blue); font-family: 'JetBrains Mono', monospace; font-size: 14px;">dl</code> to delete the character under the cursor</span>
+              </div>
+              <div style="background: rgba(16, 185, 129, 0.1); padding: 12px 16px; border-radius: 8px; border-left: 3px solid var(--neon-green);">
+                <span style="color: var(--text-secondary); font-size: 15px;">Combine movements: <code style="background: rgba(0, 0, 0, 0.4); padding: 4px 8px; border-radius: 4px; color: var(--neon-blue); font-family: 'JetBrains Mono', monospace; font-size: 14px;">gg</code> (top), <code style="background: rgba(0, 0, 0, 0.4); padding: 4px 8px; border-radius: 4px; color: var(--neon-blue); font-family: 'JetBrains Mono', monospace; font-size: 14px;">G</code> (bottom), <code style="background: rgba(0, 0, 0, 0.4); padding: 4px 8px; border-radius: 4px; color: var(--neon-blue); font-family: 'JetBrains Mono', monospace; font-size: 14px;">{line}G</code> (specific line)</span>
+              </div>
+              <div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.05) 100%); padding: 12px 16px; border-radius: 8px; border-left: 3px solid var(--neon-yellow);">
+                <span style="color: var(--neon-yellow); font-size: 15px; font-weight: 600;">⚡ Optimal solution is usually 3-5 keystrokes: search, navigate, delete</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     <% end %>
 
     <!-- Action Buttons -->
-    <div class="flex gap-4 justify-center">
-      <%= button_to "Start New Training", star_hunt_sessions_path,
-          class: "px-6 py-3 bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700 text-white rounded-lg font-semibold transition shadow-lg" %>
+    <div class="slide-in" style="animation-delay: 0.3s; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; align-items: center;">
+      <%= button_to star_hunt_sessions_path, method: :post, style: "background: none; border: none; padding: 0; cursor: pointer;" do %>
+        <div class="stats-button" style="padding: 14px 36px; border-radius: 50px; background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%); color: white; font-weight: 700; font-size: 16px; box-shadow: 0 6px 20px rgba(0, 217, 255, 0.5); transition: all 0.3s ease; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 10px;">
+          <span>🚀</span>
+          <span>Start New Training</span>
+        </div>
+      <% end %>
 
-      <%= link_to "Back to Home", root_path,
-          class: "px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-semibold transition" %>
+      <%= link_to root_path, style: "text-decoration: none;" do %>
+        <div class="stats-button" style="padding: 14px 36px; border-radius: 50px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%); color: white; font-weight: 700; font-size: 16px; border: 2px solid rgba(255, 255, 255, 0.2); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); transition: all 0.3s ease; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 10px;">
+          <span>🏠</span>
+          <span>Back to Home</span>
+        </div>
+      <% end %>
 
-      <%= button_to "Delete Session", star_hunt_session_path(@session), method: :delete,
+      <%= button_to star_hunt_session_path(@session), method: :delete,
           data: { turbo_confirm: "Delete this training session? This cannot be undone." },
-          class: "px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition" %>
+          style: "background: none; border: none; padding: 0; cursor: pointer;" do %>
+        <div class="stats-button" style="padding: 14px 36px; border-radius: 50px; background: linear-gradient(135deg, var(--neon-red) 0%, #dc2626 100%); color: white; font-weight: 700; font-size: 16px; box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5); transition: all 0.3s ease; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 10px;">
+          <span>🗑️</span>
+          <span>Delete Session</span>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
