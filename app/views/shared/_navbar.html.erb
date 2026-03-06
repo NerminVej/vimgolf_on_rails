@@ -1,6 +1,6 @@
 <div class="px-6 pt-6" style="position: relative; z-index: 10;">
   <nav style="background: rgba(10, 14, 39, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 16px; border: 1px solid rgba(0, 217, 255, 0.2); box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.04) inset;">
-    <div class="px-8 py-4 flex justify-between items-center">
+    <div class="px-12 py-4 flex justify-between items-center">
       <!-- Brand -->
       <div class="flex items-center gap-8">
         <%= link_to root_path, class: "flex items-center gap-3 group" do %>
@@ -11,7 +11,7 @@
 
         <% if user_signed_in? %>
           <div class="flex items-center gap-2">
-            <%= link_to exercises_path, class: "text-gray-400 hover:text-white font-medium transition-colors px-3 py-1.5 rounded-lg hover:bg-white/5" do %>
+            <%= link_to exercises_path, class: "text-gray-400 font-medium px-3 py-1.5" do %>
               Exercises
             <% end %>
             <%= button_to practice_sessions_path, method: :post, class: "btn-primary" do %>
