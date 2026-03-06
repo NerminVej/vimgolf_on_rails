@@ -1,45 +1,41 @@
-<nav class="glass-card mx-4 mt-4" style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 12px; border: 1px solid var(--border-primary);">
-  <div class="mx-auto px-12 py-4 flex justify-between items-center w-full">
-    <!-- Brand -->
-    <div class="flex items-center gap-8">
-      <%= link_to root_path, class: "flex items-center gap-3 group" do %>
-        <div class="text-2xl font-bold text-gradient" style="font-family: 'JetBrains Mono', monospace;">
-          <span style="color: var(--neon-blue);">V</span><span style="color: var(--neon-purple);">I</span><span style="color: var(--neon-pink);">M</span>GOLF
-        </div>
-      <% end %>
+<div class="px-6 pt-6" style="position: relative; z-index: 10;">
+  <nav style="background: rgba(10, 14, 39, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 16px; border: 1px solid rgba(0, 217, 255, 0.2); box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.04) inset;">
+    <div class="px-8 py-4 flex justify-between items-center">
+      <!-- Brand -->
+      <div class="flex items-center gap-8">
+        <%= link_to root_path, class: "flex items-center gap-3 group" do %>
+          <div class="text-2xl font-bold" style="font-family: 'JetBrains Mono', monospace;">
+            <span style="color: var(--neon-blue);">V</span><span style="color: var(--neon-purple);">I</span><span style="color: var(--neon-pink);">M</span><span style="color: var(--text-primary);">GOLF</span>
+          </div>
+        <% end %>
 
-      <% if user_signed_in? %>
-        <div class="flex items-center gap-6">
-          <%= link_to exercises_path, class: "text-gray-300 hover:text-white font-semibold transition-all hover:text-shadow relative group px-4" do %>
-            <span>Exercises</span>
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300"></span>
-          <% end %>
-          <%= button_to practice_sessions_path, method: :post, class: "btn-primary" do %>
-            <span style="margin-right: 8px;">⚡</span>Practice Mode
-          <% end %>
-          <%= button_to star_hunt_sessions_path, method: :post, class: "btn-primary" do %>
-            <span style="margin-right: 8px;">⭐</span>Star Hunt
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+        <% if user_signed_in? %>
+          <div class="flex items-center gap-2">
+            <%= link_to exercises_path, class: "text-gray-400 hover:text-white font-medium transition-colors px-3 py-1.5 rounded-lg hover:bg-white/5" do %>
+              Exercises
+            <% end %>
+            <%= button_to practice_sessions_path, method: :post, class: "btn-primary" do %>
+              <span style="margin-right: 6px;">⚡</span>Practice
+            <% end %>
+            <%= button_to star_hunt_sessions_path, method: :post, class: "btn-primary" do %>
+              <span style="margin-right: 6px;">⭐</span>Star Hunt
+            <% end %>
+          </div>
+        <% end %>
+      </div>
 
-    <!-- Navigation Links -->
-    <div class="flex items-center gap-6">
-      <% if user_signed_in? %>
-        <!-- Authenticated User -->
-        <div class="flex items-center gap-4 px-6 py-3 rounded-lg" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);">
-          <span class="text-sm" style="color: var(--text-muted);">Player:</span>
-          <span class="font-semibold" style="color: var(--neon-blue); font-family: 'JetBrains Mono', monospace;">
+      <!-- Right side -->
+      <div class="flex items-center gap-3">
+        <% if user_signed_in? %>
+          <span class="text-sm font-mono px-3 py-1.5 rounded-lg" style="color: var(--neon-blue); background: rgba(0, 217, 255, 0.08); border: 1px solid rgba(0, 217, 255, 0.2);">
             <%= current_user.email.split('@').first %>
           </span>
-        </div>
-        <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn-danger", style: "margin-left: 8px;" %>
-      <% else %>
-        <!-- Unauthenticated User -->
-        <%= link_to "Sign In", new_user_session_path, class: "btn-secondary" %>
-        <%= link_to "Sign Up", new_user_registration_path, class: "btn-success" %>
-      <% end %>
+          <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn-danger" %>
+        <% else %>
+          <%= link_to "Sign In", new_user_session_path, class: "btn-secondary" %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "btn-success" %>
+        <% end %>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+</div>
