@@ -1,3 +1,19 @@
+<style>
+  nav .btn-primary:hover,
+  nav .btn-secondary:hover,
+  nav .btn-danger:hover,
+  nav .btn-success:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    background: unset !important;
+    border-color: unset !important;
+  }
+  nav .btn-primary:hover { background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%) !important; }
+  nav .btn-primary:hover::before { left: -100% !important; }
+  nav .btn-secondary:hover { background: rgba(255, 255, 255, 0.1) !important; border-color: rgba(255, 255, 255, 0.2) !important; }
+  nav .btn-danger:hover { background: linear-gradient(135deg, var(--neon-red) 0%, #dc2626 100%) !important; }
+  nav .btn-success:hover { background: linear-gradient(135deg, var(--neon-green) 0%, #059669 100%) !important; }
+</style>
 <div class="px-6 pt-6" style="position: relative; z-index: 10;">
   <nav style="background: rgba(10, 14, 39, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 16px; border: 1px solid rgba(0, 217, 255, 0.2); box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.04) inset;">
     <div class="px-12 py-4 flex justify-between items-center">
