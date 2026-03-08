@@ -195,6 +195,40 @@ main {
   box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
 }
 
+/* Remove hover effects for navbar buttons */
+nav .btn-primary:hover,
+nav .btn-primary:hover::before,
+nav .btn-secondary:hover,
+nav .btn-danger:hover,
+nav .btn-success:hover {
+  transform: none;
+  box-shadow: none;
+  background: unset;
+  border-color: unset;
+  left: unset;
+}
+
+nav .btn-primary:hover {
+  background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+}
+
+nav .btn-primary:hover::before {
+  left: -100%;
+}
+
+nav .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+nav .btn-danger:hover {
+  background: linear-gradient(135deg, var(--neon-red) 0%, #dc2626 100%);
+}
+
+nav .btn-success:hover {
+  background: linear-gradient(135deg, var(--neon-green) 0%, #059669 100%);
+}
+
 /* Card Styles */
 .game-card {
   background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(31, 41, 55, 0.9) 100%);
