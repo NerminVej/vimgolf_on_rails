@@ -195,38 +195,53 @@ main {
   box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
 }
 
-/* Remove hover effects for navbar buttons */
-nav .btn-primary:hover,
-nav .btn-primary:hover::before,
-nav .btn-secondary:hover,
-nav .btn-danger:hover,
-nav .btn-success:hover {
-  transform: none;
-  box-shadow: none;
-  background: unset;
-  border-color: unset;
-  left: unset;
-}
-
-nav .btn-primary:hover {
+/* Navbar button variants — no hover effects */
+.navbar-btn-primary {
   background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
 }
 
-nav .btn-primary:hover::before {
-  left: -100%;
-}
-
-nav .btn-secondary:hover {
+.navbar-btn-secondary {
   background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-primary);
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
 }
 
-nav .btn-danger:hover {
+.navbar-btn-danger {
   background: linear-gradient(135deg, var(--neon-red) 0%, #dc2626 100%);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
 }
 
-nav .btn-success:hover {
+.navbar-btn-success {
   background: linear-gradient(135deg, var(--neon-green) 0%, #059669 100%);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
 }
 
 /* Card Styles */
