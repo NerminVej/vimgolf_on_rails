@@ -4,7 +4,7 @@ import { EditorState } from "@codemirror/state"
 import { vim } from "@replit/codemirror-vim"
 
 export default class extends Controller {
-  static targets = ["editor", "keystrokes", "completedStages", "totalKeystrokes"]
+  static targets = ["editor", "keystrokes", "mode", "completedStages", "totalKeystrokes"]
   static values = {
     sessionId: String,
     startFile: String,
@@ -28,12 +28,19 @@ export default class extends Controller {
 
   initializeEditor() {
     // Create CodeMirror editor with Vim mode
-    const vimExtension = vim()
+    const vimExtension = vim({
+      status: true,
+      onStatusChange: (status) => {
+        if (this.hasModeTarget) {
+          this.modeTargets.forEach(t => t.textContent = (status.mode || 'NORMAL').toUpperCase())
+        }
+      }
+    })
 
     const updateListener = EditorView.updateListener.of((update) => {
       if (update.docChanged) {
         this.keystrokeCount++
-        this.keystrokesTarget.textContent = this.keystrokeCount
+        this.keystrokesTargets.forEach(t => t.textContent = this.keystrokeCount)
         this.checkCompletion()
       }
     })
@@ -108,8 +115,8 @@ export default class extends Controller {
   }
 
   updateStatsDisplay() {
-    this.completedStagesTarget.textContent = this.completedStagesValue
-    this.totalKeystrokesTarget.textContent = this.totalKeystrokesValue
+    this.completedStagesTargets.forEach(t => t.textContent = this.completedStagesValue)
+    this.totalKeystrokesTargets.forEach(t => t.textContent = this.totalKeystrokesValue)
   }
 
   showToast(message, type = 'info') {

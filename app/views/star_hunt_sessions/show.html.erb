@@ -1,63 +1,115 @@
-<div class="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white p-6" data-controller="star-hunt"
+<div class="px-6 py-6" data-controller="star-hunt"
      data-star-hunt-session-id-value="<%= @session.id %>"
      data-star-hunt-start-file-value="<%= @stage_data[:start_file] %>"
      data-star-hunt-end-file-value="<%= @stage_data[:end_file] %>"
      data-star-hunt-current-stage-value="<%= @session.current_stage %>"
      data-star-hunt-completed-stages-value="<%= @session.completed_stages %>"
-     data-star-hunt-total-keystrokes-value="<%= @session.total_keystrokes %>">
+     data-star-hunt-total-keystrokes-value="<%= @session.total_keystrokes %>"
+     style="max-width: 1400px; margin: 0 auto;">
+
   <!-- Header -->
-  <div class="max-w-7xl mx-auto mb-6">
-    <div class="flex items-center justify-between bg-gray-800/50 backdrop-blur-sm rounded-lg p-4 border border-cyan-500/30">
+  <div class="flex items-center justify-between mb-5">
+    <div class="flex items-center gap-3">
+      <span style="font-size: 32px; filter: drop-shadow(0 0 10px var(--neon-yellow));">⭐</span>
       <div>
-        <h1 class="text-2xl font-bold text-cyan-400">Star Hunt Training Mode</h1>
-        <p class="text-gray-400 text-sm mt-1">Find and delete the star (*) as efficiently as possible</p>
+        <h1 class="text-2xl font-bold" style="font-family: 'JetBrains Mono', monospace; color: var(--neon-yellow);">Star Hunt Training</h1>
+        <p class="text-sm" style="color: var(--text-muted);">Find and delete the star (*) as efficiently as possible</p>
       </div>
-      <div class="flex gap-6 text-center">
-        <div>
-          <div class="text-2xl font-bold text-cyan-400" data-star-hunt-target="completedStages"><%= @session.completed_stages %></div>
-          <div class="text-xs text-gray-400 uppercase">Stages Cleared</div>
-        </div>
-        <div>
-          <div class="text-2xl font-bold text-purple-400" data-star-hunt-target="totalKeystrokes"><%= @session.total_keystrokes %></div>
-          <div class="text-xs text-gray-400 uppercase">Total Keys</div>
-        </div>
+    </div>
+    <div class="flex items-center gap-6">
+      <div class="text-center">
+        <div class="text-2xl font-bold font-mono" style="color: var(--neon-blue);" data-star-hunt-target="completedStages"><%= @session.completed_stages %></div>
+        <div class="text-xs uppercase tracking-widest" style="color: var(--text-muted);">Stages Cleared</div>
       </div>
+      <div class="text-center">
+        <div class="text-2xl font-bold font-mono" style="color: var(--neon-purple);" data-star-hunt-target="totalKeystrokes"><%= @session.total_keystrokes %></div>
+        <div class="text-xs uppercase tracking-widest" style="color: var(--text-muted);">Total Keys</div>
+      </div>
+      <%= button_to "Quit", quit_star_hunt_session_path(@session),
+          method: :post,
+          class: "navbar-btn-danger",
+          data: { confirm: "Are you sure you want to quit?" } %>
     </div>
   </div>
 
-  <!-- Main Game Area -->
-  <div class="max-w-5xl mx-auto">
-    <!-- Vim Editor - Full Width -->
-    <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg border border-cyan-500/30 overflow-hidden mb-6">
-      <div class="bg-gradient-to-r from-cyan-600 to-purple-600 p-4">
-        <h2 class="text-xl font-semibold text-white">Your Editor</h2>
-        <p class="text-sm text-gray-200">Find and delete the star!</p>
-      </div>
-      <div class="p-6">
-        <div data-star-hunt-target="editor" class="border border-gray-600 rounded overflow-hidden"></div>
-        <div class="mt-4 flex items-center justify-between text-base">
-          <div class="text-gray-400">
-            Keystrokes: <span class="text-cyan-400 font-mono font-bold text-xl" data-star-hunt-target="keystrokes">0</span>
-          </div>
-          <div class="text-gray-400">
-            Mode: <span class="text-purple-400 font-semibold text-lg" data-star-hunt-target="mode">NORMAL</span>
-          </div>
+  <!-- Main Two-Column Layout -->
+  <div class="flex gap-5" style="align-items: stretch;">
+
+    <!-- Editor Column -->
+    <div class="flex-1 flex flex-col game-card" style="padding: 0; overflow: hidden; min-width: 0;">
+      <!-- Editor title bar -->
+      <div class="flex items-center justify-between px-5 py-3" style="background: linear-gradient(90deg, rgba(0,217,255,0.12) 0%, rgba(168,85,247,0.12) 100%); border-bottom: 1px solid var(--border-primary);">
+        <div class="flex items-center gap-2">
+          <span class="font-mono text-sm font-semibold" style="color: var(--neon-blue);">stage_<%= @session.current_stage %>.txt</span>
+          <span class="text-xs px-2 py-0.5 rounded" style="background: rgba(0,217,255,0.1); color: var(--neon-blue); border: 1px solid rgba(0,217,255,0.3);">VIM</span>
+        </div>
+        <div class="flex items-center gap-4 text-sm">
+          <span style="color: var(--text-muted);">Keys: <span class="font-mono font-bold" style="color: var(--neon-blue);" data-star-hunt-target="keystrokes">0</span></span>
+          <span style="color: var(--text-muted);">Mode: <span class="font-semibold" style="color: var(--neon-purple);" data-star-hunt-target="mode">NORMAL</span></span>
         </div>
       </div>
+      <!-- CodeMirror editor -->
+      <div data-star-hunt-target="editor" style="flex: 1; min-height: 480px;"></div>
     </div>
 
-    <!-- Info and Actions -->
-    <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-4 border border-cyan-500/30">
-      <div class="flex items-center justify-between">
-        <div class="text-sm text-gray-400">
-          <span class="text-cyan-400 font-semibold">Stage <%= @session.current_stage %></span> -
-          Use Vim commands to navigate and delete the star efficiently
+    <!-- Sidebar Column -->
+    <div class="flex flex-col gap-4" style="width: 280px; flex-shrink: 0;">
+
+      <!-- Stage Info -->
+      <div class="game-card">
+        <div class="text-xs uppercase tracking-widest mb-3" style="color: var(--text-muted);">Current Stage</div>
+        <div class="text-5xl font-bold font-mono text-center my-4" style="color: var(--neon-yellow); text-shadow: 0 0 20px rgba(234,179,8,0.5);">
+          <%= @session.current_stage %>
         </div>
-        <%= button_to "Quit Session", quit_star_hunt_session_path(@session),
-            method: :post,
-            class: "px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition font-semibold text-sm",
-            data: { confirm: "Are you sure you want to quit?" } %>
+        <p class="text-sm text-center" style="color: var(--text-secondary);">
+          Navigate to the <span style="color: var(--neon-yellow); font-weight: 600;">star (*)</span> and delete it with minimum keystrokes.
+        </p>
       </div>
+
+      <!-- How to Play -->
+      <div class="game-card">
+        <div class="text-xs uppercase tracking-widest mb-3" style="color: var(--text-muted);">How to Play</div>
+        <ul class="text-sm space-y-2" style="color: var(--text-secondary);">
+          <li class="flex items-start gap-2">
+            <span style="color: var(--neon-blue); font-weight: 700;">h j k l</span>
+            <span style="color: var(--text-muted);">navigate</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span style="color: var(--neon-blue); font-weight: 700;">x</span>
+            <span style="color: var(--text-muted);">delete char under cursor</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span style="color: var(--neon-blue); font-weight: 700;">f*</span>
+            <span style="color: var(--text-muted);">jump to star on line</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span style="color: var(--neon-blue); font-weight: 700;">/</span>
+            <span style="color: var(--text-muted);">search for star</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Session Stats -->
+      <div class="game-card">
+        <div class="text-xs uppercase tracking-widest mb-3" style="color: var(--text-muted);">Session Stats</div>
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-sm" style="color: var(--text-secondary);">Stages Cleared</span>
+            <span class="font-mono font-bold" style="color: var(--neon-blue);" data-star-hunt-target="completedStages"><%= @session.completed_stages %></span>
+          </div>
+          <div style="height: 1px; background: var(--border-primary);"></div>
+          <div class="flex justify-between items-center">
+            <span class="text-sm" style="color: var(--text-secondary);">Total Keystrokes</span>
+            <span class="font-mono font-bold" style="color: var(--neon-purple);" data-star-hunt-target="totalKeystrokes"><%= @session.total_keystrokes %></span>
+          </div>
+          <div style="height: 1px; background: var(--border-primary);"></div>
+          <div class="flex justify-between items-center">
+            <span class="text-sm" style="color: var(--text-secondary);">This Stage</span>
+            <span class="font-mono font-bold" style="color: var(--neon-yellow);" data-star-hunt-target="keystrokes">0</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
